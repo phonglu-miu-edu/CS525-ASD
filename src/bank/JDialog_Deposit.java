@@ -1,5 +1,4 @@
-import java.awt.*;
-import javax.swing.*;
+package project.bank;
 
 public class JDialog_Deposit extends javax.swing.JDialog
 {

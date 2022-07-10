@@ -1,7 +1,4 @@
-import java.awt.*;
-import javax.swing.*;
-
-
+package project.bank;
 
 public class JDialog_Withdraw extends javax.swing.JDialog
 {

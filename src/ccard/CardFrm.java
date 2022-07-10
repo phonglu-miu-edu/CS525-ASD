@@ -1,10 +1,8 @@
 package project.ccard;
 
-import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 /**
  * A basic JFC based application.
@@ -188,8 +186,8 @@ public class CardFrm extends javax.swing.JFrame
 	void JButtonNewCCAC_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		/*
-		 JDialog_AddPAcc type object is for adding personal information
-		 construct a JDialog_AddPAcc type object 
+		 project.bank.JDialog_AddPAcc type object is for adding personal information
+		 construct a project.bank.JDialog_AddPAcc type object
 		 set the boundaries and show it 
 		*/
 		
