@@ -190,22 +190,23 @@ public class CardFrm extends javax.swing.JFrame
 		 construct a project.bank.JDialog_AddPAcc type object
 		 set the boundaries and show it 
 		*/
-		
-		JDialog_AddCCAccount ccac = new JDialog_AddCCAccount(thisframe);
-		ccac.setBounds(450, 20, 300, 380);
-		ccac.show();
 
-		if (newaccount){
-            // add row to table
-            rowdata[0] = clientName;
-            rowdata[1] = ccnumber;
-            rowdata[2] = expdate;
-            rowdata[3] = accountType;
-            rowdata[4] = "0";
-            model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-            newaccount=false;
-        }
+		// TODO: comment to make the code could be compiled
+//		JDialog_AddCCAccount ccac = new JDialog_AddCCAccount(thisframe);
+//		ccac.setBounds(450, 20, 300, 380);
+//		ccac.show();
+//
+//		if (newaccount){
+//            // add row to table
+//            rowdata[0] = clientName;
+//            rowdata[1] = ccnumber;
+//            rowdata[2] = expdate;
+//            rowdata[3] = accountType;
+//            rowdata[4] = "0";
+//            model.addRow(rowdata);
+//            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
+//            newaccount=false;
+//        }
 
        
         
@@ -227,16 +228,17 @@ public class CardFrm extends javax.swing.JFrame
             String name = (String)model.getValueAt(selection, 0);
     	    
 		    //Show the dialog for adding deposit amount for the current mane
-		    JDialog_Deposit dep = new JDialog_Deposit(thisframe,name);
-		    dep.setBounds(430, 15, 275, 140);
-		    dep.show();
-    		
-		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 4);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
+			// TODO: comment to make the code could be compiled
+//		    JDialog_Deposit dep = new JDialog_Deposit(thisframe,name);
+//		    dep.setBounds(430, 15, 275, 140);
+//		    dep.show();
+//
+//		    // compute new amount
+//            long deposit = Long.parseLong(amountDeposit);
+//            String samount = (String)model.getValueAt(selection, 4);
+//            long currentamount = Long.parseLong(samount);
+//		    long newamount=currentamount+deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 4);
 		}
 		
 		
@@ -250,19 +252,20 @@ public class CardFrm extends javax.swing.JFrame
             String name = (String)model.getValueAt(selection, 0);
 
 		    //Show the dialog for adding withdraw amount for the current mane
-		    JDialog_Withdraw wd = new JDialog_Withdraw(thisframe,name);
-		    wd.setBounds(430, 15, 275, 140);
-		    wd.show();
-    		
-		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 4);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount-deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
-		    if (newamount <0){
-		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-		    }
+			// TODO: comment to make the code could be compiled
+//		    JDialog_Withdraw wd = new JDialog_Withdraw(thisframe,name);
+//		    wd.setBounds(430, 15, 275, 140);
+//		    wd.show();
+//
+//		    // compute new amount
+//            long deposit = Long.parseLong(amountDeposit);
+//            String samount = (String)model.getValueAt(selection, 4);
+//            long currentamount = Long.parseLong(samount);
+//		    long newamount=currentamount-deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 4);
+//		    if (newamount <0){
+//		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
+//		    }
 		}
 		
 		

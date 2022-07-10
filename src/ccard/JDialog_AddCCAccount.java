@@ -183,23 +183,24 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
 
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
-       parentframe.clientName=JTextField_NAME.getText();
-       parentframe.street=JTextField_STR.getText();
-       parentframe.city=JTextField_CT.getText();
-       parentframe.zip=JTextField_ZIP.getText();
-       parentframe.state=JTextField_ST.getText();
-       parentframe.ccnumber=JTextField_CCNR.getText();
-       parentframe.expdate=JTextField_ExpDate.getText();
-       if (JRadioButton_Gold.isSelected())
-           parentframe.accountType="Gold";
-           else{
-            if (JRadioButton_Silver.isSelected())
-                parentframe.accountType="Silver";
-                else
-                parentframe.accountType="Bronze";
-           }
-           
-	   parentframe.newaccount=true;
+		// TODO: comment to make the code could be compiled
+//       parentframe.clientName=JTextField_NAME.getText();
+//       parentframe.street=JTextField_STR.getText();
+//       parentframe.city=JTextField_CT.getText();
+//       parentframe.zip=JTextField_ZIP.getText();
+//       parentframe.state=JTextField_ST.getText();
+//       parentframe.ccnumber=JTextField_CCNR.getText();
+//       parentframe.expdate=JTextField_ExpDate.getText();
+//       if (JRadioButton_Gold.isSelected())
+//           parentframe.accountType="Gold";
+//           else{
+//            if (JRadioButton_Silver.isSelected())
+//                parentframe.accountType="Silver";
+//                else
+//                parentframe.accountType="Bronze";
+//           }
+//
+//	   parentframe.newaccount=true;
        dispose();
 	}
 
