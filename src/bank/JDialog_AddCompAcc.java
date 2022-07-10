@@ -1,4 +1,4 @@
-package project.bank;
+package bank;
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {

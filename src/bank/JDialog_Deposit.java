@@ -1,4 +1,4 @@
-package project.bank;
+package bank;
 
 public class JDialog_Deposit extends javax.swing.JDialog
 {

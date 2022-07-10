@@ -1,6 +1,6 @@
-package project.ccard;
+package ccard;
 
-import project.bank.BankFrm;
+import bank.BankFrm;
 
 
 

@@ -1,4 +1,4 @@
-package project.ccard;
+package ccard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

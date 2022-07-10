@@ -1,4 +1,4 @@
-package project.bank; /**
+package bank; /**
 		A basic implementation of the JDialog class.
 **/
 

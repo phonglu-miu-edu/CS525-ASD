@@ -1,4 +1,4 @@
-package project.bank;
+package bank;
 
 public class JDialog_Withdraw extends javax.swing.JDialog
 {

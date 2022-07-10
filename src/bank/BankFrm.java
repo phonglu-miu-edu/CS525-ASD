@@ -1,4 +1,4 @@
-package project.bank;
+package bank;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -99,7 +99,7 @@ public class BankFrm extends javax.swing.JFrame
 	 * Sets the Look and Feel to the System Look and Feel.
 	 * Creates a new JFrame1 and makes it visible.
 	 *****************************************************/
-	static public void main(String args[])
+	public static void main(String args[])
 	{
 		try {
 		    // Add the following code if you want the Look and Feel
