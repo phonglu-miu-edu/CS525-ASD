@@ -1,9 +1,9 @@
 package framework.command;
 
 import framework.IFinco;
-import framework.models.Customer;
+import framework.model.Customer;
 
-public class AddOrganization implements IOperation {
+public class AddOrganization implements ICommand {
     private String name;
     private String street;
     private String city;
@@ -34,7 +34,7 @@ public class AddOrganization implements IOperation {
 
     @Override
     public void execute() {
-        customer = finCo.createCompany(name, street, city, state, zip, email, noEmployees);
+        customer = finCo.createOrganization(name, street, city, state, zip, email, noEmployees);
     }
 
     public Customer getCustomer() {

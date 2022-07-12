@@ -1,10 +1,10 @@
 package framework.command;
 
 import framework.IFinco;
-import framework.models.Account;
-import framework.models.Customer;
+import framework.model.Account;
+import framework.model.Customer;
 
-public class AddAccount implements IOperation {
+public class AddAccount implements ICommand {
 
     private final Customer customer;
     private final IFinco finCo;

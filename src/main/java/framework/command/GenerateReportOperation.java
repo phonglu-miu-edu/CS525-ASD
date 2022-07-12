@@ -2,7 +2,7 @@ package framework.command;
 
 import framework.IFinco;
 
-public class GenerateReportOperation implements  IOperation{
+public class GenerateReportOperation implements  ICommand{
 
     private IFinco finCo;
 
@@ -13,7 +13,7 @@ public class GenerateReportOperation implements  IOperation{
 
     @Override
     public void execute() {
-        finCo.generateReport();
+        finCo.report();
     }
 
 }
