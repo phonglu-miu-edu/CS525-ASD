@@ -1,7 +1,7 @@
 package framework;
 
 import framework.factory.AccountFactory;
-import framework.factory.CustomerFactory;
+import framework.factory.SimpleFactory;
 import framework.model.*;
 import framework.reports.IReport;
 import framework.repository.IRepository;
@@ -51,7 +51,7 @@ public class FinCo implements IFinCo {
 
     @Override
     public ICustomer createCustomer(String name, String street, String city, String state, Integer zip, String email, String birthDate) {
-        ICustomer customer = CustomerFactory.getPerson(name, street, city, state, zip, email, birthDate);
+        ICustomer customer = SimpleFactory.getCustomer(name, street, city, state, zip, email, birthDate);
 
         this.customers.add(customer);
 
@@ -60,7 +60,7 @@ public class FinCo implements IFinCo {
 
     @Override
     public ICustomer createOrganization(String name, String street, String city, String state, Integer zip, String email, String noEmployees) {
-        ICustomer customer = CustomerFactory.getCompany(name, street, city, state, zip, email, noEmployees);
+        ICustomer customer = SimpleFactory.getCompany(name, street, city, state, zip, email, noEmployees);
 
         this.customers.add(customer);
 

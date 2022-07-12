@@ -6,7 +6,7 @@ import framework.factory.AccountFactory;
 import framework.model.IAccount;
 import framework.model.ICustomer;
 
-public class BankAccountFactory extends AccountFactory {
+public class BankACFactory extends AccountFactory {
     public static IAccount createAccount(ICustomer customer, String accountNum, Integer type) {
         if (type == 1) {
             return new Checking(customer, accountNum);

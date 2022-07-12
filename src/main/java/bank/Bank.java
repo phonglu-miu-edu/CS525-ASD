@@ -11,7 +11,7 @@ import framework.view.ViewType;
 public class Bank extends Framework {
     public static void main(String[] args) {
         IFinCoViewController viewController = new BankViewController(ViewType.BANK);
-        IFinCo finCoExtension = new FinCoExtension();
+        IFinCo finCoExtension = new FinCoBank();
         CommandManager operationManager = new CommandManager();
         Bank bank = new Bank();
 
