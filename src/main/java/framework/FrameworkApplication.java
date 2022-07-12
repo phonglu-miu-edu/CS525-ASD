@@ -1,13 +1,14 @@
 package framework;
 
-import framework.command.CommandManager;
-import framework.repository.IRepository;
-import framework.view.FincoViewController;
-import framework.view.ViewType;
+import framework.commands.CommandManager;
+import framework.database.IRepository;
+import framework.views.FincoViewController;
+import framework.views.VIEW_TYPE;
 
-public class FrameworkApplication extends Framework{
+
+public class FrameworkApplication extends Framework {
     public static void main(String[] args) {
-        FincoViewController viewController = new FincoViewController(ViewType.BANK);
+        FincoViewController viewController = new FincoViewController(VIEW_TYPE.BANK);
         FinCo finCo = new FinCo();
         CommandManager operationManager = new CommandManager();
         IFramework frameworkApplication = new FrameworkApplication();
@@ -18,7 +19,7 @@ public class FrameworkApplication extends Framework{
     }
 
     public void initData() {
-        IRepository repo = this.viewController.getFrameworkApplication().getFinCo().getRepository();
+    	IRepository repo = this.viewController.getFrameworkApplication().getFinCo().getRepository();
         repo.load(repo.getRepoPath());
     }
 }

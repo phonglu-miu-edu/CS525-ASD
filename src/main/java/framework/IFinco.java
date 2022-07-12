@@ -1,16 +1,14 @@
 package framework;
-
-import ccard.CreditCardType;
-import framework.model.Account;
-import framework.model.Customer;
-import framework.model.Entry;
-import framework.model.IReport;
-import framework.repository.IRepository;
+import creditcard.models.CreditCardType;
+import framework.database.IRepository;
+import framework.models.Account;
+import framework.models.Customer;
+import framework.models.Entry;
+import framework.reports.IReport;
 
 import java.util.Collection;
 
 public interface IFinco {
-
     void setFrameworkApplication(IFramework frameworkApplication);
 
     Collection<Account> getAccounts();
@@ -19,9 +17,9 @@ public interface IFinco {
 
     public IRepository getRepository();
 
-    Customer createCustomer(String name, String street, String city, String state, Integer zip, String email, String birthDate);
+    Customer createPerson(String name, String street, String city, String state, Integer zip, String email, String birthDate);
 
-    Customer createOrganization(String name, String street, String city, String state, Integer zip, String email, String noEmployees);
+    Customer createCompany(String name, String street, String city, String state, Integer zip, String email, String noEmployees);
 
     Account createAccount(Customer customer, String accountNum);
 
@@ -31,11 +29,11 @@ public interface IFinco {
 
     Account createAccount(Customer customer, String accountNum, CreditCardType type);
 
-    void report();
+    void generateReport();
 
     void setReport(IReport report);
 
-    void interest();
+    void addInterest();
 
     Entry withdraw(Account account, double amount);
 

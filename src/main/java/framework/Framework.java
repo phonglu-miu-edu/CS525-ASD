@@ -1,24 +1,23 @@
 package framework;
 
-import framework.command.CommandManager;
-import framework.view.IFincoViewController;
+import framework.commands.CommandManager;
+import framework.views.IFincoViewController;
 
 public abstract class Framework implements IFramework {
-
     protected IFinco finCo;
     protected IFincoViewController viewController;
-    protected CommandManager commandManager;
+    protected CommandManager operationManager;
     protected IFramework frameworkApplication;
 
-    public static void  setUp(IFramework frameworkApplication, IFincoViewController viewController, IFinco finCo, CommandManager commandManager) {
+    public static void  setUp(IFramework frameworkApplication, IFincoViewController viewController, IFinco finCo, CommandManager operationManager) {
         frameworkApplication.setViewController(viewController);
         frameworkApplication.setFinCo(finCo);
-        frameworkApplication.setCommandManager(commandManager);
+        frameworkApplication.setOperationManager(operationManager);
 
         viewController.setFrameworkApplication(frameworkApplication);
         finCo.setFrameworkApplication(frameworkApplication);
 
-        frameworkApplication.initData();
+        //frameworkApplication.initData();
 
         viewController.setVisible();
     }
@@ -44,18 +43,17 @@ public abstract class Framework implements IFramework {
     }
 
     @Override
-    public CommandManager getCommandManager() {
-        return commandManager;
+    public CommandManager getOperationManager() {
+        return operationManager;
     }
 
     @Override
-    public void setCommandManager(CommandManager commandManager) {
-        this.commandManager = commandManager;
+    public void setOperationManager(CommandManager operationManager) {
+        this.operationManager = operationManager;
     }
 
     @Override
     public void setFrameworkApplication(IFramework frameworkApplication) {
         this.frameworkApplication = frameworkApplication;
     }
-
 }

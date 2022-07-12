@@ -1,7 +1,7 @@
 package framework;
 
-import framework.command.CommandManager;
-import framework.view.IFincoViewController;
+import framework.commands.CommandManager;
+import framework.views.IFincoViewController;
 
 public interface IFramework {
     IFinco getFinCo();
@@ -12,11 +12,11 @@ public interface IFramework {
 
     void setViewController(IFincoViewController ui);
 
-    CommandManager getCommandManager();
+    CommandManager getOperationManager();
 
-    void setCommandManager(CommandManager cmdManager);
+    void setOperationManager(CommandManager operationManager);
 
     void setFrameworkApplication(IFramework frameworkApplication);
 
-    void initData();
+    //void initData();
 }
