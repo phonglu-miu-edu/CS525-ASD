@@ -16,30 +16,30 @@ public class CardFrm extends FwFrm
     String clientName,street,city, zip, state,accountType,amountDeposit,expdate, phone, email, birthDate, ccnumber;
 	boolean newaccount;
     CardFrm thisframe;
-	javax.swing.JButton JButton_NewCCAccount;
-	javax.swing.JButton JButton_GenBill;
-	javax.swing.JButton JButton_Deposit;
-	javax.swing.JButton JButton_Charge;
+	JButton JButton_NewCCAccount;
+	JButton JButton_GenBill;
+	JButton JButton_Deposit;
+	JButton JButton_Charge;
 
 	@Override
-	public void addTopBar(javax.swing.JPanel topBar) {
-		JButton_NewCCAccount = new javax.swing.JButton();
+	public void addTopBar(JPanel topBar) {
+		JButton_NewCCAccount = new JButton();
 		JButton_NewCCAccount.setText("Add Credit-card account");
 		topBar.add(JButton_NewCCAccount);
 		JButton_NewCCAccount.setBounds(24, 20, 192, 33);
 
-		JButton_GenBill = new javax.swing.JButton();
+		JButton_GenBill = new JButton();
 		JButton_GenBill.setText("Generate Monthly bills");
 		JButton_GenBill.setActionCommand("jbutton");
 		topBar.add(JButton_GenBill);
 		JButton_GenBill.setBounds(240, 20, 192, 33);
 
-		JButton_Deposit = new javax.swing.JButton();
+		JButton_Deposit = new JButton();
 		JButton_Deposit.setText("Deposit");
 		topBar.add(JButton_Deposit);
 		JButton_Deposit.setBounds(468, 104, 96, 33);
 
-		JButton_Charge = new javax.swing.JButton();
+		JButton_Charge = new JButton();
 		JButton_Charge.setText("Charge");
 		topBar.add(JButton_Charge);
 		JButton_Charge.setBounds(468, 164, 96, 33);

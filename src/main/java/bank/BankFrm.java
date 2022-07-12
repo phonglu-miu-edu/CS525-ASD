@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * A basic JFC based application.
  **/
-public class BankFrm extends javax.swing.JFrame
+public class BankFrm extends JFrame
 {
     /****
      * init variables in the object
@@ -25,7 +25,7 @@ public class BankFrm extends javax.swing.JFrame
 		myframe = this;
 
 		setTitle("Banking Application.");
-		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0,0));
 		setSize(575,310);
 		setVisible(false);
@@ -122,13 +122,13 @@ public class BankFrm extends javax.swing.JFrame
 	}
 
 
-	javax.swing.JPanel JPanel1 = new javax.swing.JPanel();
-	javax.swing.JButton JButton_PerAC = new javax.swing.JButton();
-	javax.swing.JButton JButton_CompAC = new javax.swing.JButton();
-	javax.swing.JButton JButton_Deposit = new javax.swing.JButton();
-	javax.swing.JButton JButton_Withdraw = new javax.swing.JButton();
-	javax.swing.JButton JButton_Addinterest= new javax.swing.JButton();
-	javax.swing.JButton JButton_Exit = new javax.swing.JButton();
+	JPanel JPanel1 = new JPanel();
+	JButton JButton_PerAC = new JButton();
+	JButton JButton_CompAC = new JButton();
+	JButton JButton_Deposit = new JButton();
+	JButton JButton_Withdraw = new JButton();
+	JButton JButton_Addinterest= new JButton();
+	JButton JButton_Exit = new JButton();
 
 	void exitApplication()
 	{

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.function.Consumer;
 
 
-public abstract class FwFrm extends javax.swing.JFrame {
+public abstract class FwFrm extends JFrame {
     private DefaultTableModel model;
     private JTable JTable1;
     private JScrollPane JScrollPane1;
@@ -21,7 +21,7 @@ public abstract class FwFrm extends javax.swing.JFrame {
         return this.JTable1;
     }
 
-    public abstract void addTopBar(javax.swing.JPanel topBar);
+    public abstract void addTopBar(JPanel topBar);
     public abstract void addActionListener(SymAction synAction);
     public abstract void actionPerformed(java.awt.event.ActionEvent event);
 
@@ -29,7 +29,7 @@ public abstract class FwFrm extends javax.swing.JFrame {
         thisframe = this;
 
 //        setTitle("Credit Card Processing Application.");
-        setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout(0, 0));
         setSize(575, 310);
         setVisible(false);
@@ -58,9 +58,9 @@ public abstract class FwFrm extends javax.swing.JFrame {
         JPanel1.add(JButton_Exit);
         JButton_Exit.setBounds(468, 248, 96, 30);
 
-        FwFrm.SymWindow aSymWindow = new FwFrm.SymWindow();
+        SymWindow aSymWindow = new SymWindow();
         this.addWindowListener(aSymWindow);
-        FwFrm.SymAction lSymAction = new FwFrm.SymAction(this::actionPerformed);
+        SymAction lSymAction = new SymAction(this::actionPerformed);
         JButton_Exit.addActionListener(lSymAction);
         addActionListener(lSymAction);
     }
@@ -89,8 +89,8 @@ public abstract class FwFrm extends javax.swing.JFrame {
         }
     }
 
-    javax.swing.JPanel JPanel1 = new javax.swing.JPanel();
-    javax.swing.JButton JButton_Exit = new javax.swing.JButton();
+    JPanel JPanel1 = new JPanel();
+    JButton JButton_Exit = new JButton();
 
     void exitApplication() {
         try {
