@@ -11,7 +11,7 @@ public class Customer implements ICustomer {
     private String state;
     private Integer zip;
     private String email;
-    private Collection<Account> accounts = new ArrayList<>();
+    private Collection<IAccount> accounts = new ArrayList<>();
 
     public Customer(String name, String street, String city, String state, Integer zip, String email) {
         this.name = name;
@@ -23,7 +23,7 @@ public class Customer implements ICustomer {
     }
 
     @Override
-    public void addAccount(Account account) {
+    public void addAccount(IAccount account) {
         this.accounts.add(account);
     }
 
@@ -87,11 +87,11 @@ public class Customer implements ICustomer {
         this.email = email;
     }
 
-    public Collection<Account> getAccounts() {
+    public Collection<IAccount> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(Collection<Account> accounts) {
+    public void setAccounts(Collection<IAccount> accounts) {
         this.accounts = accounts;
     }
 }

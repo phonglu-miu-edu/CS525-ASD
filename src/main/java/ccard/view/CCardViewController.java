@@ -1,10 +1,10 @@
 package ccard.view;
 
 import ccard.ICCardFinCo;
-import ccard.model.CreditCardType;
 import ccard.command.AddAccount;
+import ccard.model.CreditCardType;
 import framework.command.AddPerson;
-import framework.model.Customer;
+import framework.model.ICustomer;
 import framework.view.FinCoViewController;
 import framework.view.ViewType;
 
@@ -29,7 +29,7 @@ public class CCardViewController extends FinCoViewController implements ICCardVi
 
     @Override
     public void createCreditCardAccount(String accountNum, String clientName, String street, String city, String state, Integer zip, String email, String birthDate, String expiryDate, CreditCardType cardType) {
-        Customer customer = findCustomerByName(clientName);
+        ICustomer customer = findCustomerByName(clientName);
 
         if (customer == null) {
             AddPerson addPerson = new AddPerson(

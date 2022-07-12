@@ -27,7 +27,7 @@ public class Repository extends ConnectionDb implements IRepository {
 		System.out.println(this.finCo.getCustomers());
 		System.out.println("--------------");
 
-		for (Customer customer : this.finCo.getCustomers()) {
+		for (ICustomer customer : this.finCo.getCustomers()) {
 			JSONObject c = new JSONObject();
 			JSONArray accs = new JSONArray();
 
@@ -43,14 +43,14 @@ public class Repository extends ConnectionDb implements IRepository {
 			else if(customer.getClass().equals(Person.class))
 				c.put("type", "person");
 
-			for (Account account : customer.getAccounts()) {
+			for (IAccount account : customer.getAccounts()) {
 				JSONObject a = new JSONObject();
 				JSONArray entries = new JSONArray();
 
 				a.put("accountNum", account.getAccountNum());
 				a.put("currentBalance", account.getCurrentBalance());
 
-				for (Entry entry : account.getEntryHistory()) {
+				for (IEntry entry : account.getEntryHistory()) {
 					JSONObject e = new JSONObject();
 
 					e.put("amount", entry.getAmount());

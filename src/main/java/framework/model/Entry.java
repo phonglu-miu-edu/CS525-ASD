@@ -2,7 +2,7 @@ package framework.model;
 
 import java.util.Date;
 
-public abstract class Entry {
+public abstract class Entry implements IEntry {
     protected double amount;
     protected Date date;
     protected IAccount account;

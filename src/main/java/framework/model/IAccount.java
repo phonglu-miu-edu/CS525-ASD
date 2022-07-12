@@ -3,6 +3,7 @@ package framework.model;
 import java.util.Collection;
 
 public interface IAccount {
+    String getAccountNum();
     void addInterest();
 
     void setBalance(double amount);
@@ -13,5 +14,13 @@ public interface IAccount {
 
     void setNotification(INotification<String> notification);
 
-    Collection<Entry> getEntryHistory();
+    Collection<IEntry> getEntryHistory();
+
+    void addEntryHistory(IEntry entry);
+
+     void changeBalanceByAmount(double amount);
+
+    ICustomer getCustomer();
+
+    double getCurrentBalance();
 }

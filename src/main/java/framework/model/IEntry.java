@@ -1,5 +1,9 @@
 package framework.model;
 
+import java.util.Date;
+
 public interface IEntry {
-    public void process();
+    void process();
+    double getAmount();
+    Date getDate();
 }

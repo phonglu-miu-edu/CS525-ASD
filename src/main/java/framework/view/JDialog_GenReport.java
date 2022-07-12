@@ -1,4 +1,4 @@
-package ccard.view;
+package framework.view;
 
 import javax.swing.*;
 import java.awt.*;

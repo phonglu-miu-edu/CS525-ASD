@@ -1,7 +1,9 @@
 package framework.model;
 
+import java.util.Collection;
+
 public interface ICustomer {
-    void addAccount(Account account);
+    void addAccount(IAccount account);
 
     String getName();
 
@@ -14,4 +16,6 @@ public interface ICustomer {
     Integer getZip();
 
     String getEmail();
+
+    Collection<IAccount> getAccounts();
 }

@@ -1,9 +1,11 @@
 package framework.view;
 
-import framework.command.GenerateReport;
+import ccard.report.MonthlyBillingReport;
+import framework.IFramework;
+import framework.command.ReportGenerate;
 import framework.model.Account;
+import framework.model.IAccount;
 import framework.model.Person;
-import framework.model.AllAccountsReport;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -65,7 +67,7 @@ public class FinCoView extends JFrame {
         JScrollPane1.getViewport().add(JTable1);
         JTable1.setBounds(0, 0, 422, 0);
 
-        Collection<Account> accounts = this.viewController.getAccounts();
+        Collection<IAccount> accounts = this.viewController.getAccounts();
 
         loadAccountData(accounts, model, JTable1);
         setUpButtons();
@@ -81,7 +83,7 @@ public class FinCoView extends JFrame {
         JButton_Deposit.addActionListener(lSymAction);
         JButton_Withdraw.addActionListener(lSymAction);
         JButton_AddInterest.addActionListener(lSymAction);
-        JButton_GenerateReport.addActionListener(lSymAction);
+        JButton_ReportGenerate.addActionListener(lSymAction);
     }
 
     public JPanel JPanel1 = new JPanel();
@@ -90,7 +92,7 @@ public class FinCoView extends JFrame {
     public JButton JButton_Deposit = new JButton();
     public JButton JButton_Withdraw = new JButton();
     public JButton JButton_AddInterest = new JButton();
-    public JButton JButton_GenerateReport = new JButton();
+    public JButton JButton_ReportGenerate = new JButton();
     public JButton JButton_Exit = new JButton();
 
     public void setUpButtons() {
@@ -115,9 +117,9 @@ public class FinCoView extends JFrame {
         JPanel1.add(JButton_Withdraw);
         JButton_Withdraw.setBounds(468, 140, 96, 33);
 
-        JButton_GenerateReport.setText("Generate Report");
-        JPanel1.add(JButton_GenerateReport);
-        JButton_GenerateReport.setBounds(468, 190, 116, 33);
+        JButton_ReportGenerate.setText("Generate Report");
+        JPanel1.add(JButton_ReportGenerate);
+        JButton_ReportGenerate.setBounds(468, 190, 116, 33);
 
         JButton_Exit.setText("Exit");
         JPanel1.add(JButton_Exit);
@@ -164,8 +166,9 @@ public class FinCoView extends JFrame {
             else if (object == JButton_Withdraw)
                 JButtonWithdraw_actionPerformed(event);
             else if (object == JButton_AddInterest)
-                JButtonAddInterest_actionPerformed(event);;
-
+                JButtonAddInterest_actionPerformed(event);
+            else if (object == JButton_ReportGenerate)
+                JButtonReportGenerate_actionPerformed(event);;
         }
     }
 
@@ -173,24 +176,26 @@ public class FinCoView extends JFrame {
         return List.of("Name", "CC number", "Exp date", "Type", "Balance");
     }
 
-    public void loadAccountData(Collection<Account> accounts, DefaultTableModel model, JTable table) {
+    public void loadAccountData(Collection<IAccount> accounts, DefaultTableModel model, JTable table) {
         model.setRowCount(0);
 
-        for (Account account : accounts) {
-            Object[] row = new Object[8];
-            row[0] = account.getAccountNum();
-            row[1] = account.getCustomer().getName();
-            row[2] = account.getCustomer().getCity();
+        if (accounts != null) {
+            for (IAccount account : accounts) {
+                Object[] row = new Object[8];
+                row[0] = account.getAccountNum();
+                row[1] = account.getCustomer().getName();
+                row[2] = account.getCustomer().getCity();
 
-            if (account.getCustomer() instanceof Person) {
-                row[3] = 'P';
-            } else {
-                row[3] = 'C';
+                if (account.getCustomer() instanceof Person) {
+                    row[3] = 'P';
+                } else {
+                    row[3] = 'C';
+                }
+
+                row[4] = account.getCurrentBalance();
+
+                model.addRow(row);
             }
-
-            row[4] = account.getCurrentBalance();
-
-            model.addRow(row);
         }
 
         table.getSelectionModel().setAnchorSelectionIndex(-1);
@@ -223,7 +228,7 @@ public class FinCoView extends JFrame {
             }
 
             this.viewController.createCustomer(accountNumber, clientName, street, city, state, Integer.parseInt(zip), email, birthDate);
-            Collection<Account> accounts = this.viewController.getAccounts();
+            Collection<IAccount> accounts = this.viewController.getAccounts();
             loadAccountData(accounts, model, JTable1);
         }
     }
@@ -248,9 +253,24 @@ public class FinCoView extends JFrame {
 
             this.viewController.createOrg(accountNumber, clientName, street, city, state, Integer.parseInt(zip), email,
                 noOfEmployee);
-            Collection<Account> accounts = this.viewController.getAccounts();
+            Collection<IAccount> accounts = this.viewController.getAccounts();
             loadAccountData(accounts, model, JTable1);
         }
+    }
+
+    public void JButtonReportGenerate_actionPerformed(ActionEvent event) {
+        IFramework framework = viewController.getFrameworkApplication();
+        Collection<IAccount> all_accounts = viewController.getAccounts();
+        MonthlyBillingReport billingReport = new MonthlyBillingReport(all_accounts);
+        framework.getFinCo().setReport(billingReport);
+        ReportGenerate reportGenerate = new ReportGenerate(framework.getFinCo());
+        framework.getCommandManager().invoke(reportGenerate);
+
+        String billingReportDetails = billingReport.getBillingReport();
+
+        JDialog_GenReport billFrm = new JDialog_GenReport(this, billingReportDetails, "Monthly billing report");
+        billFrm.setBounds(450, 20, 400, 350);
+        billFrm.show();
     }
 
     public void JButtonDeposit_actionPerformed(ActionEvent event) {
@@ -266,7 +286,7 @@ public class FinCoView extends JFrame {
 
             double deposit = Double.parseDouble(amountDeposit);
 
-            Account acc = viewController.getAccounts().stream()
+            IAccount acc = viewController.getAccounts().stream()
                                         .filter(x -> x.getAccountNum().equals(model.getValueAt(selection, 0))).findFirst().get();
 
             viewController.deposit(acc, deposit);
@@ -290,7 +310,7 @@ public class FinCoView extends JFrame {
 
             double withdrawAmount = Double.parseDouble(amountDeposit);
 
-            Account acc = viewController.getAccounts().stream()
+            IAccount acc = viewController.getAccounts().stream()
                                         .filter(x -> x.getAccountNum().equals(model.getValueAt(selection, 0))).findFirst().get();
 
             viewController.withdraw(acc, withdrawAmount);

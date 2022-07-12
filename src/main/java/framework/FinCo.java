@@ -13,8 +13,8 @@ import java.util.Collection;
 
 public class FinCo implements IFinCo {
 
-    public Collection<Account> accounts = new ArrayList<>();
-    public Collection<Customer> customers = new ArrayList<>();
+    public Collection<IAccount> accounts = new ArrayList<>();
+    public Collection<ICustomer> customers = new ArrayList<>();
     public IFramework frameworkApplication;
     private IReport report;
     protected IRepository repository;
@@ -34,12 +34,12 @@ public class FinCo implements IFinCo {
     }
 
     @Override
-    public Collection<Account> getAccounts() {
+    public Collection<IAccount> getAccounts() {
         return accounts;
     }
 
     @Override
-    public Collection<Customer> getCustomers() {
+    public Collection<ICustomer> getCustomers() {
         return customers;
     }
 
@@ -49,8 +49,8 @@ public class FinCo implements IFinCo {
     }
 
     @Override
-    public Customer createCustomer(String name, String street, String city, String state, Integer zip, String email, String birthDate) {
-        Customer customer = CustomerFactory.getPerson(name, street, city, state, zip, email, birthDate);
+    public ICustomer createCustomer(String name, String street, String city, String state, Integer zip, String email, String birthDate) {
+        ICustomer customer = CustomerFactory.getPerson(name, street, city, state, zip, email, birthDate);
 
         this.customers.add(customer);
 
@@ -58,8 +58,8 @@ public class FinCo implements IFinCo {
     }
 
     @Override
-    public Customer createOrganization(String name, String street, String city, String state, Integer zip, String email, String noEmployees) {
-        Customer customer = CustomerFactory.getCompany(name, street, city, state, zip, email, noEmployees);
+    public ICustomer createOrganization(String name, String street, String city, String state, Integer zip, String email, String noEmployees) {
+        ICustomer customer = CustomerFactory.getCompany(name, street, city, state, zip, email, noEmployees);
 
         this.customers.add(customer);
 
@@ -68,14 +68,14 @@ public class FinCo implements IFinCo {
 
 
     @Override
-    public Account createAccount(Customer customer, String accountNum) {
-        Account account = AccountFactory.createAccount(customer, accountNum);
+    public IAccount createAccount(ICustomer customer, String accountNum) {
+        IAccount account = AccountFactory.createAccount(customer, accountNum);
         this.accounts.add(account);
         return account;
     }
 
     @Override
-    public Account createAccount(Customer customer, String accountNum, Integer type) {
+    public IAccount createAccount(ICustomer customer, String accountNum, Integer type) {
         return null;
     }
 
@@ -91,7 +91,7 @@ public class FinCo implements IFinCo {
 
     @Override
     public void addInterest() {
-        for (Account acc : accounts) {
+        for (IAccount acc : accounts) {
             acc.addInterest();
         }
 
@@ -99,9 +99,9 @@ public class FinCo implements IFinCo {
     }
 
     @Override
-    public Entry withdraw(Account account, double amount) {
+    public IEntry withdraw(IAccount account, double amount) {
         account.changeBalanceByAmount(-1 * amount);
-        Entry entry = new WithdrawEntry(account, amount);
+        IEntry entry = new WithdrawEntry(account, amount);
         account.addEntryHistory(entry);
 
         String message = "Withdrawal amount of " + amount + " is made at "
@@ -114,13 +114,13 @@ public class FinCo implements IFinCo {
     }
 
     @Override
-    public Entry deposit(Account account, double amount) {
+    public IEntry deposit(IAccount account, double amount) {
         if (amount < 0) {
             return null;
         }
 
         account.changeBalanceByAmount(amount);
-        Entry entry = new DepositEntry(account, amount);
+        IEntry entry = new DepositEntry(account, amount);
         account.addEntryHistory(entry);
 
         String message = "Deposit amount of " + amount + " is made at "
@@ -132,7 +132,7 @@ public class FinCo implements IFinCo {
         return entry;
     }
 
-    public void sendNotification(String message, Account account, double amount) {
+    public void sendNotification(String message, IAccount account, double amount) {
         ICustomer customer = account.getCustomer();
         if (account.getNotification() != null) {
             if (customer instanceof Organization) {

@@ -2,6 +2,7 @@ package framework.command;
 
 import framework.IFinCo;
 import framework.model.Customer;
+import framework.model.ICustomer;
 
 public class AddCompany implements ICommand {
     private String name;
@@ -10,7 +11,7 @@ public class AddCompany implements ICommand {
     private String state;
     private Integer zip;
     private String email;
-    private Customer customer;
+    private ICustomer customer;
     private String noEmployees;
     private IFinCo finCo;
 
@@ -37,7 +38,7 @@ public class AddCompany implements ICommand {
         customer = finCo.createOrganization(name, street, city, state, zip, email, noEmployees);
     }
 
-    public Customer getCustomer() {
+    public ICustomer getCustomer() {
         return customer;
     }
 }

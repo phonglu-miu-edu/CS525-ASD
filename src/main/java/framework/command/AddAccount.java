@@ -3,14 +3,16 @@ package framework.command;
 import framework.IFinCo;
 import framework.model.Account;
 import framework.model.Customer;
+import framework.model.IAccount;
+import framework.model.ICustomer;
 
 public class AddAccount implements ICommand {
-    private final Customer customer;
+    private final ICustomer customer;
     private final IFinCo finCo;
-    private Account account;
+    private IAccount account;
     private String accountNum;
 
-    public AddAccount(Customer customer, String accountNum, IFinCo finCo) {
+    public AddAccount(ICustomer customer, String accountNum, IFinCo finCo) {
         this.customer = customer;
         this.finCo = finCo;
         this.accountNum = accountNum;
@@ -21,7 +23,7 @@ public class AddAccount implements ICommand {
         account = this.finCo.createAccount(customer, accountNum);
     }
 
-    public Account getAccount() {
+    public IAccount getAccount() {
         return this.account;
     }
 }

@@ -1,9 +1,7 @@
 package framework.view;
 
 import framework.IFramework;
-import framework.model.Account;
-import framework.model.Customer;
-import framework.model.Entry;
+import framework.model.*;
 
 import java.util.Collection;
 
@@ -15,23 +13,23 @@ public interface IFinCoViewController {
 
     void setFrameworkApplication(IFramework frameworkApplication);
 
-    Customer createCustomer(String accountNum, String name, String street, String city, String state, Integer zip, String email, String birthDate);
+    ICustomer createCustomer(String accountNum, String name, String street, String city, String state, Integer zip, String email, String birthDate);
 
-    Customer createOrg(String accountNum, String name, String street, String city, String state, Integer zip, String email, String noEmployees);
+    ICustomer createOrg(String accountNum, String name, String street, String city, String state, Integer zip, String email, String noEmployees);
 
-    Collection<Customer> getCustomers();
+    Collection<ICustomer> getCustomers();
 
-    Account createAccount(Customer customer, String accountNum);
+    IAccount createAccount(ICustomer customer, String accountNum);
 
-    Collection<Account> getAccounts();
+    Collection<IAccount> getAccounts();
 
     void report();
 
     void addInterest();
 
-    Customer findCustomerByName(String name);
+    ICustomer findCustomerByName(String name);
 
-    Entry withdraw(Account account, double amount);
+    IEntry withdraw(IAccount account, double amount);
 
-    Entry deposit(Account account, double amount);
+    IEntry deposit(IAccount account, double amount);
 }

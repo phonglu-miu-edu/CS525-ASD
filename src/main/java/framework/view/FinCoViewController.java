@@ -1,13 +1,15 @@
 package framework.view;
 
 import framework.IFramework;
-import framework.model.Account;
-import framework.model.Customer;
-import framework.model.Entry;
+import framework.command.*;
+import framework.factory.AccountFactory;
+import framework.model.IAccount;
+import framework.model.ICustomer;
+import framework.model.IEntry;
 
 import java.util.Collection;
 
-public class FinCoViewController implements IFinCoViewController{
+public class FinCoViewController implements IFinCoViewController {
     public IFramework frameworkApplication;
     public FinCoView finCoView;
     public ViewType viewType;
@@ -21,8 +23,7 @@ public class FinCoViewController implements IFinCoViewController{
 
         try {
             finCoView.setVisible(true);
-        }
-        catch (Throwable t) {
+        } catch (Throwable t) {
             t.printStackTrace();
             //Ensure the application exits with an error condition.
             System.exit(1);
@@ -37,53 +38,107 @@ public class FinCoViewController implements IFinCoViewController{
         this.frameworkApplication = frameworkApplication;
     }
 
-    @Override
-    public Customer createCustomer(String accountNum, String name, String street, String city, String state, Integer zip, String email, String birthDate) {
-        return null;
+    public ICustomer createCustomer(String accountNum, String name, String street, String city, String state, Integer zip, String email, String birthDate) {
+        ICustomer customer = findCustomerByName(name);
+
+        if (customer == null) {
+            AddPerson addPerson = new AddPerson(
+                name,
+                street,
+                city,
+                state,
+                zip,
+                email,
+                birthDate,
+                frameworkApplication.getFinCo()
+            );
+
+            frameworkApplication.getCommandManager().invoke(addPerson);
+
+            customer = addPerson.getCustomer();
+        }
+
+        this.createAccount(customer, accountNum);
+
+        this.getFrameworkApplication().getFinCo().getRepository().write();
+
+        return customer;
     }
 
-    @Override
-    public Customer createOrg(String accountNum, String name, String street, String city, String state, Integer zip, String email, String noEmployees) {
-        return null;
+    public ICustomer createOrg(String accountNum, String name, String street, String city, String state, Integer zip, String email, String noEmployees) {
+        ICustomer customer = findCustomerByName(name);
+
+        if (customer == null) {
+            AddCompany addCompany = new AddCompany(
+                name,
+                street,
+                city,
+                state,
+                zip,
+                email,
+                noEmployees,
+                frameworkApplication.getFinCo()
+            );
+
+            frameworkApplication.getCommandManager().invoke(addCompany);
+
+            customer = addCompany.getCustomer();
+        }
+
+        this.createAccount(customer, accountNum);
+
+        this.getFrameworkApplication().getFinCo().getRepository().write();
+
+        return customer;
     }
 
-    @Override
-    public Collection<Customer> getCustomers() {
-        return null;
+    public Collection<ICustomer> getCustomers() {
+        return frameworkApplication.getFinCo().getCustomers();
     }
 
-    @Override
-    public Collection<Account> getAccounts() {
-        return null;
+    public IAccount createAccount(ICustomer customer, String accountNum) {
+        IAccount account = AccountFactory.createAccount(customer, accountNum);
+
+        customer.addAccount(account);
+        this.getAccounts().add(account);
+
+        return account;
     }
 
-    @Override
+    public Collection<IAccount> getAccounts() {
+        return frameworkApplication.getFinCo().getAccounts();
+    }
+
     public void report() {
-
+        ReportGenerate operation = new ReportGenerate(frameworkApplication.getFinCo());
+        frameworkApplication.getCommandManager().invoke(operation);
     }
 
-    @Override
     public void addInterest() {
-
+        AddInterest addInterest = new AddInterest(frameworkApplication.getFinCo());
+        frameworkApplication.getCommandManager().invoke(addInterest);
     }
 
-    @Override
-    public Customer findCustomerByName(String name) {
+    public ICustomer findCustomerByName(String name) {
+        for (ICustomer customer : frameworkApplication.getFinCo().getCustomers()) {
+            if (customer.getName() == name) {
+                return customer;
+            }
+        }
         return null;
     }
 
-    @Override
-    public Entry deposit(Account account, double amount) {
-        return null;
+    public IEntry withdraw(IAccount account, double amount) {
+        Withdraw withdraw = new Withdraw(account, amount, frameworkApplication.getFinCo());
+        frameworkApplication.getCommandManager().invoke(withdraw);
+
+        return withdraw.getEntry();
     }
 
-    @Override
-    public Entry withdraw(Account account, double amount) {
-        return null;
-    }
+    public IEntry deposit(IAccount account, double amount) {
+        Deposit deposit = new Deposit(account, amount, frameworkApplication.getFinCo());
+        frameworkApplication.getCommandManager().invoke(deposit);
 
-    @Override
-    public Account createAccount(Customer customer, String accountNum) {
-        return null;
+        return deposit.getEntry();
     }
 }

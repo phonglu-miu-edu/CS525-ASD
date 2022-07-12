@@ -67,7 +67,7 @@ public class CreditCardRepository extends Repository {
 
         System.out.println(this.finCo.getCustomers());
 
-        for (Customer customer : this.finCo.getCustomers()) {
+        for (ICustomer customer : this.finCo.getCustomers()) {
             JSONObject c = new JSONObject();
             JSONArray accs = new JSONArray();
 
@@ -81,7 +81,7 @@ public class CreditCardRepository extends Repository {
             
             System.out.println(customer.getAccounts());
 
-            for (Account account : customer.getAccounts()) {
+            for (IAccount account : customer.getAccounts()) {
                 JSONObject a = new JSONObject();
                 JSONArray entries = new JSONArray();
 
@@ -98,7 +98,7 @@ public class CreditCardRepository extends Repository {
                     a.put("accType", "copper");
                 }
 
-                for (Entry entry : account.getEntryHistory()) {
+                for (IEntry entry : account.getEntryHistory()) {
                     JSONObject e = new JSONObject();
 
                     e.put("amount", entry.getAmount());
