@@ -1,22 +1,22 @@
 package framework;
 
-import framework.commands.CommandManager;
-import framework.views.IFincoViewController;
+import framework.command.CommandManager;
+import framework.view.IFinCoViewController;
 
 public interface IFramework {
-    IFinco getFinCo();
+    IFinCo getFinCo();
 
-    void setFinCo(IFinco finCo);
+    void setFinCo(IFinCo finCo);
 
-    IFincoViewController getViewController();
+    IFinCoViewController getViewController();
 
-    void setViewController(IFincoViewController ui);
+    void setViewController(IFinCoViewController ui);
 
-    CommandManager getOperationManager();
+    CommandManager getCommandManager();
 
-    void setOperationManager(CommandManager operationManager);
+    void setCommandManager(CommandManager commandManager);
 
     void setFrameworkApplication(IFramework frameworkApplication);
 
-    //void initData();
+    void initData();
 }

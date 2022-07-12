@@ -1,33 +1,27 @@
 package framework;
-import creditcard.models.CreditCardType;
-import framework.database.IRepository;
-import framework.models.Account;
-import framework.models.Customer;
-import framework.models.Entry;
-import framework.reports.IReport;
+
+import framework.model.*;
+import framework.repository.IRepository;
 
 import java.util.Collection;
 
-public interface IFinco {
+public interface IFinCo {
+
     void setFrameworkApplication(IFramework frameworkApplication);
 
-    Collection<Account> getAccounts();
+    Collection<IAccount> getAccounts();
 
-    Collection<Customer> getCustomers();
+    Collection<ICustomer> getCustomers();
 
     public IRepository getRepository();
 
-    Customer createPerson(String name, String street, String city, String state, Integer zip, String email, String birthDate);
+    ICustomer createCustomer(String name, String street, String city, String state, Integer zip, String email, String birthDate);
 
-    Customer createCompany(String name, String street, String city, String state, Integer zip, String email, String noEmployees);
+    ICustomer createOrganization(String name, String street, String city, String state, Integer zip, String email, String noEmployees);
 
-    Account createAccount(Customer customer, String accountNum);
+    IAccount createAccount(ICustomer customer, String accountNum);
 
-    Account createAccount(Customer customer, String accountNum, Integer type);
-
-    Account createAccount(Customer customer, String accountNum, CreditCardType type, String expiryDate);
-
-    Account createAccount(Customer customer, String accountNum, CreditCardType type);
+    IAccount createAccount(ICustomer customer, String accountNum, Integer type);
 
     void generateReport();
 
@@ -35,7 +29,7 @@ public interface IFinco {
 
     void addInterest();
 
-    Entry withdraw(Account account, double amount);
+    IEntry withdraw(IAccount account, double amount);
 
-    Entry deposit(Account account, double amount);
+    IEntry deposit(IAccount account, double amount);
 }

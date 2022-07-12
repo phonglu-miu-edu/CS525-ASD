@@ -1,55 +1,55 @@
 package framework;
 
-import framework.commands.CommandManager;
-import framework.views.IFincoViewController;
+import framework.command.CommandManager;
+import framework.view.IFinCoViewController;
 
 public abstract class Framework implements IFramework {
-    protected IFinco finCo;
-    protected IFincoViewController viewController;
-    protected CommandManager operationManager;
+    protected IFinCo finCo;
+    protected IFinCoViewController viewController;
+    protected CommandManager commandManager;
     protected IFramework frameworkApplication;
 
-    public static void  setUp(IFramework frameworkApplication, IFincoViewController viewController, IFinco finCo, CommandManager operationManager) {
+    public static void setUp(IFramework frameworkApplication, IFinCoViewController viewController, IFinCo finCo, CommandManager commandManager) {
         frameworkApplication.setViewController(viewController);
         frameworkApplication.setFinCo(finCo);
-        frameworkApplication.setOperationManager(operationManager);
+        frameworkApplication.setCommandManager(commandManager);
 
         viewController.setFrameworkApplication(frameworkApplication);
         finCo.setFrameworkApplication(frameworkApplication);
 
-        //frameworkApplication.initData();
+        frameworkApplication.initData();
 
         viewController.setVisible();
     }
 
     @Override
-    public IFinco getFinCo() {
+    public IFinCo getFinCo() {
         return finCo;
     }
 
     @Override
-    public void setFinCo(IFinco finCo) {
+    public void setFinCo(IFinCo finCo) {
         this.finCo = finCo;
     }
 
     @Override
-    public IFincoViewController getViewController() {
+    public IFinCoViewController getViewController() {
         return viewController;
     }
 
     @Override
-    public void setViewController(IFincoViewController viewController) {
+    public void setViewController(IFinCoViewController viewController) {
         this.viewController = viewController;
     }
 
     @Override
-    public CommandManager getOperationManager() {
-        return operationManager;
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 
     @Override
-    public void setOperationManager(CommandManager operationManager) {
-        this.operationManager = operationManager;
+    public void setCommandManager(CommandManager commandManager) {
+        this.commandManager = commandManager;
     }
 
     @Override
