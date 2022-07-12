@@ -2,9 +2,12 @@ package ccard.view;
 
 import ccard.ICCardFinCo;
 import ccard.command.AddAccount;
+import ccard.command.Withdraw;
 import ccard.model.CreditCardType;
 import framework.command.AddPerson;
+import framework.model.IAccount;
 import framework.model.ICustomer;
+import framework.model.IEntry;
 import framework.view.FinCoViewController;
 import framework.view.ViewType;
 
@@ -51,5 +54,12 @@ public class CCardViewController extends FinCoViewController implements ICCardVi
         AddAccount addAccount= new AddAccount(customer, accountNum, cardType, expiryDate, (ICCardFinCo) frameworkApplication.getFinCo());
 
         frameworkApplication.getCommandManager().invoke(addAccount);
+    }
+    @Override
+    public IEntry withdraw(IAccount account, double amount) {
+        Withdraw withdraw = new Withdraw(account, amount, (ICCardFinCo)frameworkApplication.getFinCo());
+        frameworkApplication.getCommandManager().invoke(withdraw);
+
+        return withdraw.getEntry();
     }
 }
