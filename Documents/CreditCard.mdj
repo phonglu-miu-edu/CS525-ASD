@@ -3981,7 +3981,7 @@
 															"top": 47,
 															"width": 124.8544921875,
 															"height": 13,
-															"text": "OperationManager"
+															"text": "CommandManager"
 														},
 														{
 															"_type": "LabelView",
@@ -5841,7 +5841,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGB7UN9ZYVqXhE="
 									},
-									"name": "OperationManager",
+									"name": "CommandManager",
 									"represent": {
 										"$ref": "AAAAAAGB7VwQEoirx4o="
 									},

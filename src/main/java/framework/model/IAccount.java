@@ -23,4 +23,6 @@ public interface IAccount {
     ICustomer getCustomer();
 
     double getCurrentBalance();
+
+    void setCurrentBalance(double currentBalance);
 }
