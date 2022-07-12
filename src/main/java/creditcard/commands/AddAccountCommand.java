@@ -1,12 +1,12 @@
 package creditcard.commands;
 
 import creditcard.models.CreditCardType;
-import framework.commands.IOperation;
+import framework.commands.ICommand;
 import framework.IFinco;
 import framework.models.Account;
 import framework.models.Customer;
 
-public class AddAccountOperation implements IOperation {
+public class AddAccountCommand implements ICommand {
 
     private final Customer customer;
     private String expiryDate;
@@ -15,7 +15,7 @@ public class AddAccountOperation implements IOperation {
     private String accountNum;
     private CreditCardType type;
 
-    public AddAccountOperation(Customer customer, String accountNum, CreditCardType type, String expiryDate, IFinco finCo) {
+    public AddAccountCommand(Customer customer, String accountNum, CreditCardType type, String expiryDate, IFinco finCo) {
         this.customer = customer;
         this.expiryDate = expiryDate;
         this.finCo = finCo;

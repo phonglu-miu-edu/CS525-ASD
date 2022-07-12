@@ -1,6 +1,6 @@
 package framework.views;
 
-import framework.commands.GenerateReportOperation;
+import framework.commands.ReportGenerate;
 import framework.models.Account;
 import framework.models.Person;
 import framework.reports.AllAccountsReport;
@@ -208,7 +208,7 @@ public class FinCoView extends JFrame {
 		Collection<Account> all_accounts = viewController.getAccounts();
 		AllAccountsReport report = new AllAccountsReport(all_accounts);
 		viewController.getFrameworkApplication().getFinCo().setReport(report);
-		GenerateReportOperation generateReport = new GenerateReportOperation(viewController.getFrameworkApplication().getFinCo());
+		ReportGenerate generateReport = new ReportGenerate(viewController.getFrameworkApplication().getFinCo());
 		viewController.getFrameworkApplication().getOperationManager().invoke(generateReport);
 
 		String reportDetails = report.getReport();

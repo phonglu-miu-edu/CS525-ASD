@@ -1,11 +1,11 @@
 package banking.commands;
 
 import framework.IFinco;
-import framework.commands.IOperation;
+import framework.commands.ICommand;
 import framework.models.Account;
 import framework.models.Customer;
 
-public class AddAccount implements IOperation {
+public class AddAccount implements ICommand {
     private final Customer customer;
     private String accountNum;
     private Integer type;

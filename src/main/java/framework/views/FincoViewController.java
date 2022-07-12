@@ -55,7 +55,7 @@ public class FincoViewController implements IFincoViewController {
         Customer customer = findCustomerByName(name);
 
         if (customer == null) {
-            AddPersonOperation addPersonOperation = new AddPersonOperation(
+            AddCustomer addCustomer = new AddCustomer(
                     name,
                     street,
                     city,
@@ -66,9 +66,9 @@ public class FincoViewController implements IFincoViewController {
                     frameworkApplication.getFinCo()
             );
 
-            frameworkApplication.getOperationManager().invoke(addPersonOperation);
+            frameworkApplication.getOperationManager().invoke(addCustomer);
 
-            customer = addPersonOperation.getCustomer();
+            customer = addCustomer.getCustomer();
         }
 
         this.createAccount(customer, accountNum);
@@ -82,7 +82,7 @@ public class FincoViewController implements IFincoViewController {
         Customer customer = findCustomerByName(name);
 
         if (customer == null) {
-            AddCompanyOperation addCompanyOperation = new AddCompanyOperation(
+            AddOrganization addOrganization = new AddOrganization(
                     name,
                     street,
                     city,
@@ -93,9 +93,9 @@ public class FincoViewController implements IFincoViewController {
                     frameworkApplication.getFinCo()
             );
 
-            frameworkApplication.getOperationManager().invoke(addCompanyOperation);
+            frameworkApplication.getOperationManager().invoke(addOrganization);
 
-            customer = addCompanyOperation.getCustomer();
+            customer = addOrganization.getCustomer();
         }
 
         this.createAccount(customer, accountNum);
@@ -123,13 +123,13 @@ public class FincoViewController implements IFincoViewController {
     }
 
     public void generateReport() {
-    	GenerateReportOperation operatoin = new GenerateReportOperation(frameworkApplication.getFinCo());
+    	ReportGenerate operatoin = new ReportGenerate(frameworkApplication.getFinCo());
     	frameworkApplication.getOperationManager().invoke(operatoin);
     }
 
     public void addInterest() {
-    	AddInterestOperation addInterestOperation = new AddInterestOperation(frameworkApplication.getFinCo());
-    	frameworkApplication.getOperationManager().invoke(addInterestOperation);
+    	AddInterest addInterest = new AddInterest(frameworkApplication.getFinCo());
+    	frameworkApplication.getOperationManager().invoke(addInterest);
     }
 
     public Customer findCustomerByName(String name) {
@@ -142,16 +142,16 @@ public class FincoViewController implements IFincoViewController {
     }
 
     public Entry withdraw(Account account, double amount) {
-        WithdrawOperation withdrawOperation = new WithdrawOperation(account, amount, frameworkApplication.getFinCo());
-        frameworkApplication.getOperationManager().invoke(withdrawOperation);
+        Withdraw withdraw = new Withdraw(account, amount, frameworkApplication.getFinCo());
+        frameworkApplication.getOperationManager().invoke(withdraw);
 
-        return withdrawOperation.getEntry();
+        return withdraw.getEntry();
     }
 
     public Entry deposit(Account account, double amount) {
-        DepositOperation depositOperation = new DepositOperation(account, amount, frameworkApplication.getFinCo());
-        frameworkApplication.getOperationManager().invoke(depositOperation);
+        Deposit deposit = new Deposit(account, amount, frameworkApplication.getFinCo());
+        frameworkApplication.getOperationManager().invoke(deposit);
 
-        return depositOperation.getEntry();
+        return deposit.getEntry();
     }
 }

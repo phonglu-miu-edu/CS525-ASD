@@ -4,14 +4,14 @@ import framework.IFinco;
 import framework.models.Account;
 import framework.models.Customer;
 
-public class AddAccountOperation implements IOperation {
+public class AddAccount implements ICommand {
 
     private final Customer customer;
     private final IFinco finCo;
     private Account account;
     private String accountNum;
 
-    public AddAccountOperation(Customer customer, String accountNum, IFinco finCo) {
+    public AddAccount(Customer customer, String accountNum, IFinco finCo) {
         this.customer = customer;
         this.finCo = finCo;
         this.accountNum = accountNum;

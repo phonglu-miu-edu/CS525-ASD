@@ -1,8 +1,8 @@
 package banking.views;
 
 import banking.commands.AddAccount;
-import framework.commands.AddCompanyOperation;
-import framework.commands.AddPersonOperation;
+import framework.commands.AddOrganization;
+import framework.commands.AddCustomer;
 import framework.models.Customer;
 import framework.views.FincoViewController;
 import framework.views.VIEW_TYPE;
@@ -43,7 +43,7 @@ public class BankViewController extends FincoViewController implements IBankView
         Customer customer = findCustomerByName(name);
 
         if (customer == null) {
-            AddPersonOperation addPersonOperation = new AddPersonOperation(
+            AddCustomer addCustomer = new AddCustomer(
                     name,
                     street,
                     city,
@@ -54,9 +54,9 @@ public class BankViewController extends FincoViewController implements IBankView
                     frameworkApplication.getFinCo()
             );
 
-            frameworkApplication.getOperationManager().invoke(addPersonOperation);
+            frameworkApplication.getOperationManager().invoke(addCustomer);
 
-            customer = addPersonOperation.getCustomer();
+            customer = addCustomer.getCustomer();
         }
 
         AddAccount addAccountOperation = new AddAccount(customer, accountNum, type, frameworkApplication.getFinCo());
@@ -70,7 +70,7 @@ public class BankViewController extends FincoViewController implements IBankView
         Customer customer = findCustomerByName(name);
 
         if (customer == null) {
-        	AddCompanyOperation addCompanyOperation = new AddCompanyOperation(
+        	AddOrganization addOrganization = new AddOrganization(
                     name,
                     street,
                     city,
@@ -81,9 +81,9 @@ public class BankViewController extends FincoViewController implements IBankView
                     frameworkApplication.getFinCo()
             );
 
-            frameworkApplication.getOperationManager().invoke(addCompanyOperation);
+            frameworkApplication.getOperationManager().invoke(addOrganization);
 
-            customer = addCompanyOperation.getCustomer();
+            customer = addOrganization.getCustomer();
         }
 
         AddAccount addAccountOperation = new AddAccount(customer, accountNum, type, frameworkApplication.getFinCo());

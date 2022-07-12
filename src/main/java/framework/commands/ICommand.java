@@ -1,5 +1,5 @@
 package framework.commands;
 
-public interface IOperation {
+public interface ICommand {
     void execute();
 }

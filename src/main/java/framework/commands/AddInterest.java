@@ -2,10 +2,10 @@ package framework.commands;
 
 import framework.IFinco;
 
-public class AddInterestOperation implements IOperation {
+public class AddInterest implements ICommand {
 	IFinco finCo;
 	
-	public AddInterestOperation(IFinco finco)
+	public AddInterest(IFinco finco)
 	{
 		this.finCo = finco;
 	}

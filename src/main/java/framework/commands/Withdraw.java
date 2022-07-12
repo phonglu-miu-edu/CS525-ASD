@@ -4,13 +4,13 @@ import framework.IFinco;
 import framework.models.Account;
 import framework.models.Entry;
 
-public class DepositOperation implements IOperation {
+public class Withdraw implements ICommand {
     private Account account;
     private double amount;
     private IFinco finCo;
     private Entry entry;
 
-    public DepositOperation(Account account, double amount, IFinco finCo) {
+    public Withdraw(Account account, double amount, IFinco finCo) {
         this.account = account;
         this.amount = amount;
         this.finCo = finCo;
@@ -18,13 +18,9 @@ public class DepositOperation implements IOperation {
 
     @Override
     public void execute() {
-        check();
+        Entry entry = finCo.withdraw(account, amount);
 
-        entry = finCo.deposit(account, amount);
-    }
-
-    public void check() {
-        // here other class override it.
+        this.entry = entry;
     }
 
     public Entry getEntry() {

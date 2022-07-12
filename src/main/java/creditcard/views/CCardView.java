@@ -2,7 +2,7 @@ package creditcard.views;
 
 import creditcard.models.CreditCardAccount;
 import creditcard.reports.MonthlyBillingReport;
-import framework.commands.GenerateReportOperation;
+import framework.commands.ReportGenerate;
 import framework.IFramework;
 import framework.models.Account;
 import framework.models.Person;
@@ -44,7 +44,7 @@ public class CCardView extends FinCoView  {
             Collection<Account> all_accounts = controller.getAccounts();
             MonthlyBillingReport billingReport = new MonthlyBillingReport(all_accounts);
             framework.getFinCo().setReport(billingReport);
-            GenerateReportOperation generateReport = new GenerateReportOperation(framework.getFinCo());
+            ReportGenerate generateReport = new ReportGenerate(framework.getFinCo());
             framework.getOperationManager().invoke(generateReport);
 
             String billingReportDetails = billingReport.getBillingReport();

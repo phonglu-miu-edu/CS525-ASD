@@ -1,9 +1,9 @@
 package creditcard.views;
 
-import creditcard.commands.AddAccountOperation;
+import creditcard.commands.AddAccountCommand;
 import creditcard.models.CreditCardType;
-import framework.commands.AddCompanyOperation;
-import framework.commands.AddPersonOperation;
+import framework.commands.AddOrganization;
+import framework.commands.AddCustomer;
 import framework.models.Customer;
 import framework.views.FincoViewController;
 import framework.views.VIEW_TYPE;
@@ -46,7 +46,7 @@ public class CCardViewController extends FincoViewController implements ICCardVi
         Customer customer = findCustomerByName(clientName);
 
         if (customer == null) {
-            AddPersonOperation addPersonOperation = new AddPersonOperation(
+            AddCustomer addCustomer = new AddCustomer(
                     clientName,
                     street,
                     city,
@@ -57,12 +57,12 @@ public class CCardViewController extends FincoViewController implements ICCardVi
                     frameworkApplication.getFinCo()
             );
 
-            frameworkApplication.getOperationManager().invoke(addPersonOperation);
+            frameworkApplication.getOperationManager().invoke(addCustomer);
 
-            customer = addPersonOperation.getCustomer();
+            customer = addCustomer.getCustomer();
         }
 
-        AddAccountOperation addAccountOperation = new AddAccountOperation(customer, accountNum, cardType, expiryDate, frameworkApplication.getFinCo());
+        AddAccountCommand addAccountOperation = new AddAccountCommand(customer, accountNum, cardType, expiryDate, frameworkApplication.getFinCo());
 
         frameworkApplication.getOperationManager().invoke(addAccountOperation);
     }
@@ -72,7 +72,7 @@ public class CCardViewController extends FincoViewController implements ICCardVi
         Customer customer = findCustomerByName(name);
 
         if (customer == null) {
-            AddCompanyOperation addPersonOperation = new AddCompanyOperation(
+            AddOrganization addPersonOperation = new AddOrganization(
                     name,
                     street,
                     city,
@@ -88,7 +88,7 @@ public class CCardViewController extends FincoViewController implements ICCardVi
             customer = addPersonOperation.getCustomer();
         }
 
-        AddAccountOperation addAccountOperation = new AddAccountOperation(customer, accountNum, cardType, expiryDate, frameworkApplication.getFinCo());
+        AddAccountCommand addAccountOperation = new AddAccountCommand(customer, accountNum, cardType, expiryDate, frameworkApplication.getFinCo());
 
         frameworkApplication.getOperationManager().invoke(addAccountOperation);
     }
