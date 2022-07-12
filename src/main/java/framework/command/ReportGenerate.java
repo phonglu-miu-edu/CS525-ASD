@@ -2,11 +2,11 @@ package framework.command;
 
 import framework.IFinco;
 
-public class GenerateReportOperation implements  ICommand{
+public class ReportGenerate implements  ICommand{
 
     private IFinco finCo;
 
-    public GenerateReportOperation(IFinco finCo) {
+    public ReportGenerate(IFinco finCo) {
         this.finCo = finCo;
 //        finCo.setReport(new AllAccountsReport(finCo.getAccounts()));
     }

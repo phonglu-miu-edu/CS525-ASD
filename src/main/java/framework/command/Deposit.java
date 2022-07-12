@@ -11,11 +11,10 @@ public class Deposit implements ICommand{
     private IFinco finCo;
     private Entry entry;
 
-    public Deposit(Account account, double amount, IFinco finCo, Entry entry) {
+    public Deposit(Account account, double amount, IFinco finCo) {
         this.account = account;
         this.amount = amount;
         this.finCo = finCo;
-        this.entry = entry;
     }
 
     @Override

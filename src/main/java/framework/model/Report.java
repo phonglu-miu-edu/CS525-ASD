@@ -7,7 +7,7 @@ public class Report implements IReport {
     private Collection<Account> accounts;
     private String report;
 
-    public Report(Collection<Account> accounts, String report) {
+    public Report(Collection<Account> accounts) {
         this.accounts = accounts;
         this.report = "";
     }
@@ -20,5 +20,9 @@ public class Report implements IReport {
             report += account.getBalance() + "\t\t" + account.getCurrentBalance() + "\t\t"
                     + account.getEntryHistory().size() + "\t\t" + account.getCustomer().getName()+ "\n\n\n";
         }
+    }
+
+    public String getReport() {
+        return report;
     }
 }
