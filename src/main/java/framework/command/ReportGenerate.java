@@ -7,7 +7,6 @@ public class ReportGenerate implements ICommand {
 
     public ReportGenerate(IFinCo finCo) {
         this.finCo = finCo;
-//        finCo.setReport(new AllAccountsReport(finCo.getAccounts()));
     }
 
     @Override

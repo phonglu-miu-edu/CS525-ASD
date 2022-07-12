@@ -1,8 +1,11 @@
 package ccard.view;
 
 import ccard.model.CreditCardAccount;
+import ccard.report.MonthlyBillingReport;
+import framework.command.ReportGenerate;
 import framework.model.IAccount;
 import framework.model.Person;
+import framework.reports.IReport;
 import framework.view.*;
 
 import javax.swing.*;
@@ -99,6 +102,21 @@ public class CCardView extends FinCoView {
             Collection<IAccount> accounts = this.viewController.getAccounts();
             loadAccountData(accounts, model, JTable1);
         }
+    }
+
+    @Override
+    public void JButtonReportGenerate_actionPerformed(ActionEvent event) {
+        Collection<IAccount> all_accounts = viewController.getAccounts();
+        IReport report = new MonthlyBillingReport(all_accounts);
+        viewController.getFrameworkApplication().getFinCo().setReport(report);
+        ReportGenerate generateReport = new ReportGenerate(viewController.getFrameworkApplication().getFinCo());
+        viewController.getFrameworkApplication().getCommandManager().invoke(generateReport);
+
+        String reportDetails = report.getReport();
+
+        JDialog_GenReport billFrm = new JDialog_GenReport(this, reportDetails, "Monthly Billing Report");
+        billFrm.setBounds(450, 20, 400, 350);
+        billFrm.show();
     }
 
     @Override

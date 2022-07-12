@@ -208,11 +208,6 @@ public class FinCoView extends JFrame {
     }
 
     public void JButtonPerAC_actionPerformed(ActionEvent event) {
-        /*
-         * JDialog_AddPAcc type object is for adding personal information construct a
-         * JDialog_AddPAcc type object set the boundaries and show it
-         */
-
         JDialog_AddPAcc pac = new JDialog_AddPAcc(myFrame);
         pac.setBounds(450, 20, 300, 330);
         pac.show();
@@ -233,10 +228,6 @@ public class FinCoView extends JFrame {
     }
 
     public void JButtonCompAC_actionPerformed(ActionEvent event) {
-        /*
-         * construct a JDialog_AddCompAcc type object set the boundaries and show it
-         */
-
         JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myFrame);
         pac.setBounds(450, 20, 300, 330);
         pac.show();
@@ -258,19 +249,18 @@ public class FinCoView extends JFrame {
     }
 
     public void JButtonReportGenerate_actionPerformed(ActionEvent event) {
-            Collection<IAccount> all_accounts = viewController.getAccounts();
-            IReport report = new AllAccountsReport(all_accounts);
-            viewController.getFrameworkApplication().getFinCo().setReport(report);
-            ReportGenerate generateReport = new ReportGenerate(viewController.getFrameworkApplication().getFinCo());
-            viewController.getFrameworkApplication().getCommandManager().invoke(generateReport);
+        Collection<IAccount> all_accounts = viewController.getAccounts();
+        IReport report = new AllAccountsReport(all_accounts);
+        viewController.getFrameworkApplication().getFinCo().setReport(report);
+        ReportGenerate generateReport = new ReportGenerate(viewController.getFrameworkApplication().getFinCo());
+        viewController.getFrameworkApplication().getCommandManager().invoke(generateReport);
 
-            String reportDetails = report.getReport();
+        String reportDetails = report.getReport();
 
-            JDialog_GenReport billFrm = new JDialog_GenReport(this, reportDetails, "Report Details");
-            billFrm.setBounds(450, 20, 400, 350);
-            billFrm.show();
-//		viewController.generateReport();
-        }
+        JDialog_GenReport billFrm = new JDialog_GenReport(this, reportDetails, "Report Details");
+        billFrm.setBounds(450, 20, 400, 350);
+        billFrm.show();
+    }
 
     public void JButtonDeposit_actionPerformed(ActionEvent event) {
         // get selected name
