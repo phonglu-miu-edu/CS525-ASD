@@ -1,39 +1,27 @@
 package framework.views;
 
-import framework.IFramework;
 import framework.commands.*;
 import framework.factories.AccountFactory;
+import framework.IFramework;
 import framework.models.Account;
 import framework.models.Customer;
 import framework.models.Entry;
 
-import javax.swing.*;
 import java.util.Collection;
 
 public class FincoViewController implements IFincoViewController {
     public IFramework frameworkApplication;
     public FinCoView fincoView;
-    public VIEW_TYPE view_type;
+    public VIEW_TYPE viewType;
 
-
-    public FincoViewController(VIEW_TYPE view_type) {
-        this.view_type = view_type;
+    public FincoViewController(VIEW_TYPE viewType) {
+        this.viewType = viewType;
     }
 
     public void setVisible() {
-        fincoView = new FinCoView(this, view_type);
+        fincoView = new FinCoView(this, viewType);
 
         try {
-            // Add the following code if you want the Look and Feel
-            // to be set to the Look and Feel of the native system.
-
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            }
-            catch (Exception e) {
-            }
-
-            //Create a new instance of our application's frame, and make it visible.
             fincoView.setVisible(true);
         }
         catch (Throwable t) {
@@ -73,7 +61,7 @@ public class FincoViewController implements IFincoViewController {
 
         this.createAccount(customer, accountNum);
 
-        this.getFrameworkApplication().getFinCo().getRepository().write(null);
+        this.getFrameworkApplication().getFinCo().getRepository().write();
 
         return customer;
     }
@@ -100,7 +88,7 @@ public class FincoViewController implements IFincoViewController {
 
         this.createAccount(customer, accountNum);
 
-        this.getFrameworkApplication().getFinCo().getRepository().write(null);
+        this.getFrameworkApplication().getFinCo().getRepository().write();
 
         return customer;
     }

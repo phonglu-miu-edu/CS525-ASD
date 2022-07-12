@@ -3,6 +3,7 @@ package creditcard.reports;
 import creditcard.models.CreditCardAccount;
 import framework.models.Account;
 import framework.models.Customer;
+import framework.models.ICustomer;
 import framework.reports.IReport;
 
 import java.util.Collection;
@@ -21,7 +22,7 @@ public class MonthlyBillingReport implements IReport {
     public void generateReport() {
         for (Account account: accounts) {
             CreditCardAccount ccAccount = (CreditCardAccount) account;
-            Customer customer = ccAccount.getCustomer();
+            ICustomer customer = ccAccount.getCustomer();
             String address = customer.getStreet() + ", " + customer.getCity() + ", " + customer.getState() + ", " + customer.getZip();
             billingReport += "Name = " + customer.getName() + "\n" +
                     "Address = " + address + "\n" +

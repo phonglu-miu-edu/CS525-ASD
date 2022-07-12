@@ -1,16 +1,16 @@
 package framework.commands;
 
-import framework.IFinco;
+import framework.IFinCo;
 import framework.models.Account;
 import framework.models.Entry;
 
 public class DepositOperation implements IOperation {
     private Account account;
     private double amount;
-    private IFinco finCo;
+    private IFinCo finCo;
     private Entry entry;
 
-    public DepositOperation(Account account, double amount, IFinco finCo) {
+    public DepositOperation(Account account, double amount, IFinCo finCo) {
         this.account = account;
         this.amount = amount;
         this.finCo = finCo;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Account implements IAccount {
-	private Customer customer;
+	private ICustomer customer;
 	private String accountNum;
 	private double currentBalance;
 	private Collection<Entry> entryHistory = new ArrayList<>();
@@ -12,7 +12,7 @@ public class Account implements IAccount {
 	
 	protected double interestRate;
 
-	public Account(Customer customer, String accountNum) {
+	public Account(ICustomer customer, String accountNum) {
 		this.customer = customer;
 		this.accountNum = accountNum;
 		this.currentBalance = 0;
@@ -26,7 +26,7 @@ public class Account implements IAccount {
 				+ currentBalance + ", entryHistory=" + entryHistory + '}';
 	}
 
-	public Customer getCustomer() {
+	public ICustomer getCustomer() {
 		return customer;
 	}
 

@@ -5,7 +5,6 @@ import creditcard.reports.MonthlyBillingReport;
 import framework.commands.GenerateReportOperation;
 import framework.IFramework;
 import framework.models.Account;
-import framework.models.Person;
 import framework.views.*;
 
 import javax.swing.*;
@@ -15,44 +14,28 @@ import java.util.Collection;
 import java.util.List;
 
 public class CCardView extends FinCoView  {
-
+    private JButton JButton_GenerateReport;
     public ICCardViewController controller;
 
     public CCardView(ICCardViewController controller, VIEW_TYPE ui_types) {
         super(controller, ui_types);
         this.controller = controller;
         setTitle("Credit Card Processing Application");
+
+        SymAction lSymAction = new SymAction();
+        JButton_GenerateReport.addActionListener(lSymAction);
     }
 
     @Override
     public void setUpButtons() {
-        JButton_PerAC.setText("Add personal credit card account");
+        JButton_PerAC.setText("Add Credit-Card account");
         JPanel1.add(JButton_PerAC);
         JButton_PerAC.setBounds(24,20,192,33);
 
-        JButton_CompAC.setText("Add company credit card account");
-        JButton_CompAC.setActionCommand("jbutton");
-        JPanel1.add(JButton_CompAC);
-        JButton_CompAC.setBounds(240,20,190,33);
-
-        JButton generateBillBt = new JButton("Generate Monthly Billing report");
-        JPanel1.add(generateBillBt);
-        generateBillBt.setBounds(104,55,252,33);
-        generateBillBt.addActionListener(e -> {
-
-            IFramework framework = controller.getFrameworkApplication();
-            Collection<Account> all_accounts = controller.getAccounts();
-            MonthlyBillingReport billingReport = new MonthlyBillingReport(all_accounts);
-            framework.getFinCo().setReport(billingReport);
-            GenerateReportOperation generateReport = new GenerateReportOperation(framework.getFinCo());
-            framework.getOperationManager().invoke(generateReport);
-
-            String billingReportDetails = billingReport.getBillingReport();
-
-            JDialogGenReport billFrm = new JDialogGenReport(this, billingReportDetails, "Monthly billing report");
-            billFrm.setBounds(450, 20, 400, 350);
-            billFrm.show();
-        });
+        JButton_GenerateReport = new JButton();
+        JButton_GenerateReport.setText("Generate Monthly bills");
+        JPanel1.add(JButton_GenerateReport);
+        JButton_GenerateReport.setBounds(220,20,192,33);
 
         JButton_Deposit.setText("Deposit");
         JPanel1.add(JButton_Deposit);
@@ -60,20 +43,24 @@ public class CCardView extends FinCoView  {
 
         JButton_Withdraw.setText("Charge");
         JPanel1.add(JButton_Withdraw);
-        JButton_Addinterest.setBounds(448,20,106,33);
-
-        JButton_Addinterest.setText("Add interest");
-        JPanel1.add(JButton_Addinterest);
-        JButton_Withdraw.setBounds(468,164,96,33);
+        JButton_Withdraw.setBounds(468,160,96,33);
 
         JButton_Exit.setText("Exit");
         JPanel1.add(JButton_Exit);
-        JButton_Exit.setBounds(468,248,96,30);
+        JButton_Exit.setBounds(468,220,96,30);
+    }
+
+    class SymAction implements java.awt.event.ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            Object object = event.getSource();
+            if (object == JButton_GenerateReport)
+                JButtonGenerateReport_actionPerformed(event);
+        }
     }
 
     @Override
     public List<String> getTableColumnNames() {
-        return List.of("Name", "CC number", "Exp date", "P/C", "Type", "Balance");
+        return List.of("Name", "CC number", "Exp date", "Type", "Balance");
     }
 
     @Override
@@ -82,17 +69,11 @@ public class CCardView extends FinCoView  {
 
         for (Account account : accounts) {
             CreditCardAccount ccAccount = (CreditCardAccount) account;
-            String customerType;
-            if (ccAccount.getCustomer() instanceof Person) {
-                customerType = "P";
-            } else {
-                customerType = "C";
-            }
+
             Object[] row = new Object[] {
                     ccAccount.getCustomer().getName(),
                     ccAccount.getAccountNum(),
                     ccAccount.getExpiryDate(),
-                    customerType,
                     ccAccount.getType(),
                     ccAccount.getCurrentMonthlyBalance()
             };
@@ -106,15 +87,9 @@ public class CCardView extends FinCoView  {
 
     @Override
     public void JButtonPerAC_actionPerformed(ActionEvent event) {
-		/*
-		 JDialog_AddPAcc type object is for adding personal information
-		 construct a JDialog_AddPAcc type object
-		 set the boundaries and show it
-		*/
-
-        JDialog_AddPersonalCCAccount ccac = new JDialog_AddPersonalCCAccount(this, controller);
-        ccac.setBounds(450, 20, 300, 400);
-        ccac.show();
+        JDialog_AddCreditCardAccount addCreditCardAccount = new JDialog_AddCreditCardAccount(this, controller);
+        addCreditCardAccount.setBounds(450, 20, 300, 400);
+        addCreditCardAccount.setVisible(true);
 
         if (newaccount){
             // add row to table
@@ -123,23 +98,19 @@ public class CCardView extends FinCoView  {
         }
     }
 
-    @Override
-    public void JButtonCompAC_actionPerformed(ActionEvent event) {
-		/*
-		 construct a JDialog_AddCompAcc type object
-		 set the boundaries and
-		 show it
-		*/
+    public void JButtonGenerateReport_actionPerformed(ActionEvent event) {
+        IFramework framework = controller.getFrameworkApplication();
+        Collection<Account> all_accounts = controller.getAccounts();
+        MonthlyBillingReport billingReport = new MonthlyBillingReport(all_accounts);
+        framework.getFinCo().setReport(billingReport);
+        GenerateReportOperation generateReport = new GenerateReportOperation(framework.getFinCo());
+        framework.getOperationManager().invoke(generateReport);
 
-        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(this, controller);
-        pac.setBounds(450, 20, 300, 400);
-        pac.show();
+        String billingReportDetails = billingReport.getBillingReport();
 
-        if (newaccount){
-            // add row to table
-            Collection<Account> accounts = this.viewController.getAccounts();
-            loadAccountData(accounts, model, JTable1);
-        }
+        JDialog_GenReport billFrm = new JDialog_GenReport(this, billingReportDetails, "Monthly billing report");
+        billFrm.setBounds(450, 20, 400, 350);
+        billFrm.show();
     }
 
     @Override
@@ -147,10 +118,10 @@ public class CCardView extends FinCoView  {
         // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
         if (selection >= 0) {
-            String accnr = (String) model.getValueAt(selection, 1);
+            String accountNumber = (String) model.getValueAt(selection, 1);
 
             // Show the dialog for adding deposit amount for the current mane
-            JDialog_Deposit dep = new JDialog_Deposit(myframe, accnr);
+            JDialog_Deposit dep = new JDialog_Deposit(myFrame, accountNumber);
             dep.setBounds(430, 15, 275, 140);
             dep.show();
 
@@ -160,9 +131,9 @@ public class CCardView extends FinCoView  {
                     .filter(x -> x.getAccountNum().equals(model.getValueAt(selection, 1))).findFirst().get();
 
             viewController.deposit(acc, deposit);
-            model.setValueAt(String.valueOf(acc.getCurrentBalance()), selection, 5);
+            model.setValueAt(String.valueOf(acc.getCurrentBalance()), selection, 4);
         } else {
-            JOptionPane.showMessageDialog(JButton_Addinterest, "Please first select an account to deposit to.",
+            JOptionPane.showMessageDialog(JButton_AddInterest, "Please first select an account to deposit to.",
                     "Deposit", JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -172,10 +143,10 @@ public class CCardView extends FinCoView  {
         // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
         if (selection >= 0) {
-            String accnr = (String) model.getValueAt(selection, 1);
+            String accountNumber = (String) model.getValueAt(selection, 1);
 
             // Show the dialog for adding withdraw amount for the current mane
-            JDialog_Withdraw wd = new JDialog_Withdraw(myframe, accnr);
+            JDialog_Withdraw wd = new JDialog_Withdraw(myFrame, accountNumber);
             wd.setBounds(430, 15, 275, 140);
             wd.show();
 
@@ -185,9 +156,9 @@ public class CCardView extends FinCoView  {
                     .filter(x -> x.getAccountNum().equals(model.getValueAt(selection, 1))).findFirst().get();
 
             viewController.withdraw(acc, withdrawAmount);
-            model.setValueAt(String.valueOf(acc.getCurrentBalance()), selection, 5);
+            model.setValueAt(String.valueOf(acc.getCurrentBalance()), selection, 4);
         } else {
-            JOptionPane.showMessageDialog(JButton_Addinterest, "Please first select an account to withdraw from.",
+            JOptionPane.showMessageDialog(JButton_AddInterest, "Please first select an account to withdraw from.",
                     "Withdraw", JOptionPane.WARNING_MESSAGE);
         }
     }

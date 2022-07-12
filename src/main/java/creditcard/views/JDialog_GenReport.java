@@ -1,4 +1,4 @@
-package framework.views;
+package creditcard.views;
 /*
 		A basic implementation of the JDialog class.
 */
@@ -6,11 +6,11 @@ package framework.views;
 import javax.swing.*;
 import java.awt.*;
 
-public class JDialogGenReport extends JDialog {
+public class JDialog_GenReport extends JDialog {
     String billString;
 	JButton okayBt = new JButton();
 
-	public JDialogGenReport(Frame parent, String billString, String title) {
+	public JDialog_GenReport(Frame parent, String billString, String title) {
 		super(parent);
 		this.billString = billString;
 		System.out.println("instantiating JDialogGenBill 2");

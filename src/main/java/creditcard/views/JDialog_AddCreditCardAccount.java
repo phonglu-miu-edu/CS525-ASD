@@ -9,41 +9,39 @@ import framework.views.FinCoView;
 import javax.swing.*;
 import java.awt.*;
 
-
-public class JDialog_AddCompAcc extends JDialog {
-	private ICCardViewController controller;
+public class JDialog_AddCreditCardAccount extends JDialog {
+    private ICCardViewController controller;
 	private FinCoView parent;
-
-	JRadioButton copperRB = new JRadioButton();
-	JRadioButton goldRB = new JRadioButton();
-	JRadioButton silverRB = new JRadioButton();
 
 	JLabel nameLb = new JLabel();
 	JLabel streetLb = new JLabel();
 	JLabel cityLb = new JLabel();
 	JLabel stateLb = new JLabel();
 	JLabel zipLb = new JLabel();
-	JLabel noEmployeesLb = new JLabel();
-	JLabel emailLb = new JLabel();
 	JLabel ccNumberLb = new JLabel();
 	JLabel expiryDateLb = new JLabel();
+	JLabel emailLb = new JLabel();
+	JLabel birthDateLb = new JLabel();
 
 	JTextField nameTF = new JTextField();
 	JTextField cityTF = new JTextField();
 	JTextField stateTF = new JTextField();
 	JTextField streetTF = new JTextField();
 	JTextField zipTF = new JTextField();
-	JTextField noEmployeesTF = new JTextField();
-	JTextField emailTF = new JTextField();
 	JTextField ccNumberTF = new JTextField();
 	JTextField expiryDateTF = new JTextField();
+	JTextField emailTF = new JTextField();
+	JTextField birthDateTF = new JTextField();
 
-	JButton okayBt = new JButton();
-	JButton cancelBt = new JButton();
+	JButton JButtonOK = new JButton();
+	JButton JButtonCancel = new JButton();
 
-	public JDialog_AddCompAcc(FinCoView parent, ICCardViewController controller) {
+	JRadioButton copperRB = new JRadioButton();
+	JRadioButton goldRB = new JRadioButton();
+	JRadioButton silverRB = new JRadioButton();
+    
+	public JDialog_AddCreditCardAccount(FinCoView parent, ICCardViewController controller) {
 		super(parent);
-
 		this.controller = controller;
 		this.parent = parent;
 		
@@ -51,12 +49,12 @@ public class JDialog_AddCompAcc extends JDialog {
 		// components to the visual environment. It instantiates and initializes
 		// the components. To modify the code, only use code syntax that matches
 		// what Visual Cafe can generate, or Visual Cafe may be unable to back
-		// parses your Java file into its visual environment. 
+		// parses your Java file into its visual envirenment. 
 		//{{ INIT_CONTROLS 
-		setTitle("Add company credit card account");
+		setTitle("Add personal credit card account");
 		setModal(true);
 		getContentPane().setLayout(null);
-		setSize(301,373);
+		setSize(301,393);
 		setVisible(false);
 
 		goldRB.setText("Gold");
@@ -74,27 +72,31 @@ public class JDialog_AddCompAcc extends JDialog {
 		getContentPane().add(copperRB);
 		copperRB.setBounds(36,60,84,24);
 
+		ButtonGroup g = new ButtonGroup();
+		g.add(goldRB);
+		g.add(silverRB);
+		g.add(copperRB);
 
 		nameLb.setText("Name");
 		getContentPane().add(nameLb);
 		nameLb.setForeground(Color.black);
 		nameLb.setBounds(12,108,48,24);
-		
+
 		streetLb.setText("Street");
 		getContentPane().add(streetLb);
 		streetLb.setForeground(Color.black);
 		streetLb.setBounds(12,132,48,24);
-		
+
 		cityLb.setText("City");
 		getContentPane().add(cityLb);
 		cityLb.setForeground(Color.black);
 		cityLb.setBounds(12,156,48,24);
-		
+
 		stateLb.setText("State");
 		getContentPane().add(stateLb);
 		stateLb.setForeground(Color.black);
 		stateLb.setBounds(12,180,48,24);
-		
+
 		zipLb.setText("Zip");
 		getContentPane().add(zipLb);
 		zipLb.setForeground(Color.black);
@@ -115,72 +117,64 @@ public class JDialog_AddCompAcc extends JDialog {
 		expiryDateLb.setForeground(Color.black);
 		expiryDateLb.setBounds(12,276,72,24);
 
-		noEmployeesLb.setText("No of employees");
-		getContentPane().add(noEmployeesLb);
-		noEmployeesLb.setForeground(Color.black);
-		noEmployeesLb.setBounds(12,300,96,24);
+		birthDateLb.setText("BirthDate");
+		getContentPane().add(birthDateLb);
+		birthDateLb.setForeground(Color.black);
+		birthDateLb.setBounds(12,300,72,24);
 
-		
 		getContentPane().add(nameTF);
-		nameTF.setBounds(120,108,156,20);
-		
+		nameTF.setBounds(84,108,156,20);
+
 		getContentPane().add(streetTF);
-		streetTF.setBounds(120,132,156,20);
-		
+		streetTF.setBounds(84,132,156,20);
+
 		getContentPane().add(cityTF);
-		cityTF.setBounds(120,156,156,20);
-		
+		cityTF.setBounds(84,156,156,20);
+
 		getContentPane().add(stateTF);
-		stateTF.setBounds(120,180,156,20);
-		
+		stateTF.setBounds(84,180,156,20);
+
 		getContentPane().add(zipTF);
-		zipTF.setBounds(120,204,156,20);
+		zipTF.setBounds(84,204,156,20);
 
 		getContentPane().add(emailTF);
-		emailTF.setBounds(120,228,156,20);
+		emailTF.setBounds(84,228,156,20);
 
 		getContentPane().add(ccNumberTF);
-		ccNumberTF.setBounds(120,252,156,20);
+		ccNumberTF.setBounds(84,252,156,20);
 
 		getContentPane().add(expiryDateTF);
-		expiryDateTF.setBounds(120,276,156,20);
+		expiryDateTF.setBounds(84,276,156,20);
 
-		getContentPane().add(noEmployeesTF);
-		noEmployeesTF.setBounds(120,300,156,20);
+		getContentPane().add(birthDateTF);
+		birthDateTF.setBounds(84,300,156,20);
 
-		
-		okayBt.setText("OK");
-		okayBt.setActionCommand("OK");
-		getContentPane().add(okayBt);
-		okayBt.setBounds(48,336,84,24);
-		
-		cancelBt.setText("Cancel");
-		cancelBt.setActionCommand("Cancel");
-		getContentPane().add(cancelBt);
-		cancelBt.setBounds(156,336,84,24);
-		//}}
-	
-		//{{REGISTER_LISTENERS
+		JButtonOK.setText("OK");
+		JButtonOK.setActionCommand("OK");
+		getContentPane().add(JButtonOK);
+		JButtonOK.setBounds(48,332,84,24);
+
+		JButtonCancel.setText("Cancel");
+		JButtonCancel.setActionCommand("Cancel");
+		getContentPane().add(JButtonCancel);
+		JButtonCancel.setBounds(156,332,84,24);
+
 		SymAction lSymAction = new SymAction();
-		okayBt.addActionListener(lSymAction);
-		cancelBt.addActionListener(lSymAction);
-		//}}
+		JButtonOK.addActionListener(lSymAction);
+		JButtonCancel.addActionListener(lSymAction);
 	}
 
-	class SymAction implements java.awt.event.ActionListener
-	{
-		public void actionPerformed(java.awt.event.ActionEvent event)
-		{
+	class SymAction implements java.awt.event.ActionListener {
+		public void actionPerformed(java.awt.event.ActionEvent event) {
 			Object object = event.getSource();
-			if (object == okayBt)
+			if (object == JButtonOK)
 				JButtonOK_actionPerformed(event);
-			else if (object == cancelBt)
-				JButtonCalcel_actionPerformed(event);
+			else if (object == JButtonCancel)
+				JButtonCancel_actionPerformed(event);
 		}
 	}
 
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
-
 		String clientName = nameTF.getText().trim();
 		String street = streetTF.getText().trim();
 		String city = cityTF.getText().trim();
@@ -195,7 +189,7 @@ public class JDialog_AddCompAcc extends JDialog {
 		String ccNumber = ccNumberTF.getText().trim();
 		String expiryDate = expiryDateTF.getText().trim();
 		String email = emailTF.getText().trim();
-		String noOfEmployees = noEmployeesTF.getText().trim();
+		String birthDate = birthDateTF.getText().trim();
 
 		CreditCardType cardType;
 
@@ -206,16 +200,16 @@ public class JDialog_AddCompAcc extends JDialog {
 		else
 			cardType = new Copper();
 
-		this.controller.createCompanyAccount(ccNumber, clientName, street, city, state, zip, email, noOfEmployees, expiryDate, cardType);
+		this.controller.createCreditCardAccount(ccNumber, clientName, street, city, state, zip, email, birthDate, expiryDate, cardType);
 		this.parent.newaccount = true;
 
-		dispose();
+		this.parent.viewController.getFrameworkApplication().getFinCo().getRepository().write();
 
+		dispose();
 	}
 
-	void JButtonCalcel_actionPerformed(java.awt.event.ActionEvent event)
-	{
+	void JButtonCancel_actionPerformed(java.awt.event.ActionEvent event) {
+		// make this frame invisible if Cancel button is clicked
 		dispose();
-			 
 	}
 }

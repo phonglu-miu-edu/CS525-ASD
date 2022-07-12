@@ -1,6 +1,6 @@
 package framework.commands;
 
-import framework.IFinco;
+import framework.IFinCo;
 import framework.models.Customer;
 
 public class AddCompanyOperation implements IOperation {
@@ -12,7 +12,7 @@ public class AddCompanyOperation implements IOperation {
     private String email;
     private Customer customer;
     private String noEmployees;
-    private IFinco finCo;
+    private IFinCo finCo;
 
     public AddCompanyOperation(String name,
                                String street,
@@ -21,7 +21,7 @@ public class AddCompanyOperation implements IOperation {
                                Integer zip,
                                String email,
                                String noEmployees,
-                               IFinco finCo) {
+                               IFinCo finCo) {
         this.name = name;
         this.street = street;
         this.city = city;

@@ -37,7 +37,7 @@ public class BankView extends FinCoView {
 		 * construct a JDialog_AddCompAcc type object set the boundaries and show it
 		 */
 
-		BankJDialog_AddCompAcc pac = new BankJDialog_AddCompAcc(myframe);
+		BankJDialog_AddCompAcc pac = new BankJDialog_AddCompAcc(myFrame);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 
@@ -54,7 +54,7 @@ public class BankView extends FinCoView {
 				type = 2;
 			}
 			
-			this.bankViewController.createCompanyAndAccountByType(accountnr, clientName, street, city, state,
+			this.bankViewController.createCompanyAndAccountByType(accountNumber, clientName, street, city, state,
 					Integer.parseInt(zip), email, noOfEmployee, type);
 
 			Collection<Account> accounts = this.bankViewController.getAccounts();
@@ -71,7 +71,7 @@ public class BankView extends FinCoView {
 		 set the boundaries and show it
 		*/
 
-        BankJDialog_AddPAcc pac = new BankJDialog_AddPAcc(myframe);
+        BankJDialog_AddPAcc pac = new BankJDialog_AddPAcc(myFrame);
         pac.setBounds(450, 20, 300, 330);
         pac.show();
 
@@ -89,7 +89,7 @@ public class BankView extends FinCoView {
 		        zip = "0";
 		    }
         	
-			this.bankViewController.createCustomerAndAccountByType(accountnr, clientName, street, city, state,
+			this.bankViewController.createCustomerAndAccountByType(accountNumber, clientName, street, city, state,
 					Integer.parseInt(zip), email, birthDate, type);
 
             Collection<Account> accounts = this.bankViewController.getAccounts();
@@ -105,7 +105,7 @@ public class BankView extends FinCoView {
 			String accnr = (String) model.getValueAt(selection, 0);
 
 			// Show the dialog for adding deposit amount for the current mane
-			JDialog_Deposit dep = new JDialog_Deposit(myframe, accnr);
+			JDialog_Deposit dep = new JDialog_Deposit(myFrame, accnr);
 			dep.setBounds(430, 15, 275, 140);
 			dep.show();
 
@@ -128,7 +128,7 @@ public class BankView extends FinCoView {
 			String accnr = (String) model.getValueAt(selection, 0);
 
 			// Show the dialog for adding withdraw amount for the current mane
-			JDialog_Withdraw wd = new JDialog_Withdraw(myframe, accnr);
+			JDialog_Withdraw wd = new JDialog_Withdraw(myFrame, accnr);
 			wd.setBounds(430, 15, 275, 140);
 			wd.show();
 

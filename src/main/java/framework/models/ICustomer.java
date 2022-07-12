@@ -1,5 +1,17 @@
 package framework.models;
 
 public interface ICustomer {
-    public void addAccount(Account account);
+    void addAccount(Account account);
+
+    String getName();
+
+    String getStreet();
+
+    String getCity();
+
+    String getState();
+
+    Integer getZip();
+
+    String getEmail();
 }

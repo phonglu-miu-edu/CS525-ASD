@@ -1,17 +1,17 @@
 package framework.commands;
 
-import framework.IFinco;
+import framework.IFinCo;
 import framework.models.Account;
 import framework.models.Customer;
 
 public class AddAccountOperation implements IOperation {
 
     private final Customer customer;
-    private final IFinco finCo;
+    private final IFinCo finCo;
     private Account account;
     private String accountNum;
 
-    public AddAccountOperation(Customer customer, String accountNum, IFinco finCo) {
+    public AddAccountOperation(Customer customer, String accountNum, IFinCo finCo) {
         this.customer = customer;
         this.finCo = finCo;
         this.accountNum = accountNum;

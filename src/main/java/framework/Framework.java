@@ -1,15 +1,15 @@
 package framework;
 
-import framework.commands.CommandManager;
+import framework.commands.OperationManager;
 import framework.views.IFincoViewController;
 
 public abstract class Framework implements IFramework {
-    protected IFinco finCo;
+    protected IFinCo finCo;
     protected IFincoViewController viewController;
-    protected CommandManager operationManager;
+    protected OperationManager operationManager;
     protected IFramework frameworkApplication;
 
-    public static void  setUp(IFramework frameworkApplication, IFincoViewController viewController, IFinco finCo, CommandManager operationManager) {
+    public static void setUp(IFramework frameworkApplication, IFincoViewController viewController, IFinCo finCo, OperationManager operationManager) {
         frameworkApplication.setViewController(viewController);
         frameworkApplication.setFinCo(finCo);
         frameworkApplication.setOperationManager(operationManager);
@@ -17,18 +17,18 @@ public abstract class Framework implements IFramework {
         viewController.setFrameworkApplication(frameworkApplication);
         finCo.setFrameworkApplication(frameworkApplication);
 
-        //frameworkApplication.initData();
+        frameworkApplication.initData();
 
         viewController.setVisible();
     }
 
     @Override
-    public IFinco getFinCo() {
+    public IFinCo getFinCo() {
         return finCo;
     }
 
     @Override
-    public void setFinCo(IFinco finCo) {
+    public void setFinCo(IFinCo finCo) {
         this.finCo = finCo;
     }
 
@@ -43,12 +43,12 @@ public abstract class Framework implements IFramework {
     }
 
     @Override
-    public CommandManager getOperationManager() {
+    public OperationManager getOperationManager() {
         return operationManager;
     }
 
     @Override
-    public void setOperationManager(CommandManager operationManager) {
+    public void setOperationManager(OperationManager operationManager) {
         this.operationManager = operationManager;
     }
 

@@ -1,6 +1,5 @@
 package framework;
 
-import creditcard.models.CreditCardType;
 import framework.database.IRepository;
 import framework.database.Repository;
 import framework.factories.AccountFactory;
@@ -13,24 +12,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class FinCo implements IFinco {
+public class FinCo implements IFinCo {
     public Collection<Account> accounts = new ArrayList<>();
     public Collection<Customer> customers = new ArrayList<>();
     public IFramework frameworkApplication;
     private IReport report;
 	protected IRepository repository;
 
-	public FinCo(IRepository repository) {
-		this.repository = repository;
-	}
-
     public FinCo() {
         this.repository = new Repository(this);
         repository.setRepoPath("db.json");
-    }
-
-    public IFramework getFrameworkApplication() {
-        return frameworkApplication;
     }
 
 	@Override
@@ -72,24 +63,14 @@ public class FinCo implements IFinco {
     }
 
     @Override
-    public Account createAccount(Customer customer, String accountNum) {
+    public Account createAccount(ICustomer customer, String accountNum) {
         Account account = AccountFactory.createAccount(customer, accountNum);
         this.accounts.add(account);
         return account;
     }
 
     @Override
-    public Account createAccount(Customer customer, String accountNum, Integer type) {
-        return null;
-    }
-
-    @Override
-    public Account createAccount(Customer customer, String accountNum, CreditCardType type, String expiryDate) {
-        return null;
-    }
-
-    @Override
-    public Account createAccount(Customer customer, String accountNum, CreditCardType type) {
+    public Account createAccount(ICustomer customer, String accountNum, Integer type) {
         return null;
     }
 
@@ -147,7 +128,7 @@ public class FinCo implements IFinco {
 	}
 
     public void sendNotification(String message, Account account, double amount) {
-        Customer customer = account.getCustomer();
+        ICustomer customer = account.getCustomer();
         if (account.getNotification() != null) {
             if (customer instanceof Company) {
                 account.getNotification().sendNotification(message);

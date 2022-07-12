@@ -10,13 +10,13 @@ import framework.views.VIEW_TYPE;
 import javax.swing.*;
 
 public class BankViewController extends FincoViewController implements IBankViewController {
-    public BankViewController(VIEW_TYPE view_type) {
-        super(view_type);
+    public BankViewController(VIEW_TYPE viewType) {
+        super(viewType);
     }
 
     @Override
     public void setVisible() {
-        fincoView = new BankView(this, view_type);
+        fincoView = new BankView(this, viewType);
 
         try {
             // Add the following code if you want the Look and Feel

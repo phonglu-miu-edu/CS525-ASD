@@ -1,9 +1,7 @@
 package framework.views;
 
-import framework.commands.GenerateReportOperation;
 import framework.models.Account;
 import framework.models.Person;
-import framework.reports.AllAccountsReport;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,26 +18,26 @@ public class FinCoView extends JFrame {
 	/****
 	 * init variables in the object
 	 ****/
-	public String accountnr, clientName, street, city, zip, state, accountType, clientType, amountDeposit, email,
+	public String accountNumber, clientName, street, city, zip, state, accountType, clientType, amountDeposit, email,
 			birthDate, noOfEmployee;
 	public boolean newaccount;
 	public DefaultTableModel model;
 	public JTable JTable1;
 	public JScrollPane JScrollPane1;
-	public FinCoView myframe;
-	public VIEW_TYPE view_Type;
+	public FinCoView myFrame;
+	public VIEW_TYPE viewType;
 	public IFincoViewController viewController;
 
-	public FinCoView(IFincoViewController viewController, VIEW_TYPE view_Type) {
+	public FinCoView(IFincoViewController viewController, VIEW_TYPE viewType) {
 		this.viewController = viewController;
 
-		this.view_Type = view_Type;
-		myframe = this;
+		this.viewType = viewType;
+		myFrame = this;
 
 		setTitle("Banking Application");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		setSize(600, 310);
+		setSize(600, 350);
 		setVisible(false);
 		JPanel1.setLayout(null);
 		getContentPane().add(BorderLayout.CENTER, JPanel1);
@@ -80,8 +78,7 @@ public class FinCoView extends JFrame {
 		JButton_CompAC.addActionListener(lSymAction);
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
-		JButton_Addinterest.addActionListener(lSymAction);
-		JButton_GenerateReport.addActionListener(lSymAction);
+		JButton_AddInterest.addActionListener(lSymAction);
 	}
 
 	public JPanel JPanel1 = new JPanel();
@@ -89,8 +86,7 @@ public class FinCoView extends JFrame {
 	public JButton JButton_CompAC = new JButton();
 	public JButton JButton_Deposit = new JButton();
 	public JButton JButton_Withdraw = new JButton();
-	public JButton JButton_Addinterest = new JButton();
-	public JButton JButton_GenerateReport = new JButton();
+	public JButton JButton_AddInterest = new JButton();
 	public JButton JButton_Exit = new JButton();
 
 	public void setUpButtons() {
@@ -103,10 +99,9 @@ public class FinCoView extends JFrame {
 		JPanel1.add(JButton_CompAC);
 		JButton_CompAC.setBounds(240, 20, 190, 33);
 
-
-		JButton_Addinterest.setText("Add interest");
-		JPanel1.add(JButton_Addinterest);
-		JButton_Addinterest.setBounds(448, 20, 106, 33);
+		JButton_AddInterest.setText("Add Interest");
+		JPanel1.add(JButton_AddInterest);
+		JButton_AddInterest.setBounds(448, 20, 106, 33);
 
 		JButton_Deposit.setText("Deposit");
 		JPanel1.add(JButton_Deposit);
@@ -115,10 +110,6 @@ public class FinCoView extends JFrame {
 		JButton_Withdraw.setText("Withdraw");
 		JPanel1.add(JButton_Withdraw);
 		JButton_Withdraw.setBounds(468, 140, 96, 33);
-		
-		JButton_GenerateReport.setText("Generate Report");
-		JPanel1.add(JButton_GenerateReport);
-		JButton_GenerateReport.setBounds(468, 190, 116, 33);
 
 		JButton_Exit.setText("Exit");
 		JPanel1.add(JButton_Exit);
@@ -134,24 +125,20 @@ public class FinCoView extends JFrame {
 		}
 	}
 
+	void BankFrm_windowClosing(WindowEvent event) {
+		// to do: code goes here.
+
+		try {
+			this.exitApplication();
+		} catch (Exception e) {
+		}
+	}
+
 	class SymWindow extends java.awt.event.WindowAdapter {
 		public void windowClosing(WindowEvent event) {
 			Object object = event.getSource();
 			if (object == FinCoView.this)
 				BankFrm_windowClosing(event);
-		}
-	}
-
-	void BankFrm_windowClosing(WindowEvent event) {
-		// to do: code goes here.
-
-		BankFrm_windowClosing_Interaction1(event);
-	}
-
-	void BankFrm_windowClosing_Interaction1(WindowEvent event) {
-		try {
-			this.exitApplication();
-		} catch (Exception e) {
 		}
 	}
 
@@ -168,10 +155,8 @@ public class FinCoView extends JFrame {
 				JButtonDeposit_actionPerformed(event);
 			else if (object == JButton_Withdraw)
 				JButtonWithdraw_actionPerformed(event);
-			else if (object == JButton_Addinterest)
-				JButtonAddinterest_actionPerformed(event);
-			else if (object == JButton_GenerateReport)
-				JButtonGenerateReport_actionPerformed(event);
+			else if (object == JButton_AddInterest)
+				JButtonAddInterest_actionPerformed(event);
 
 		}
 	}
@@ -203,21 +188,6 @@ public class FinCoView extends JFrame {
 		table.getSelectionModel().setAnchorSelectionIndex(-1);
 		newaccount = false;
 	}
-	
-	public void JButtonGenerateReport_actionPerformed(ActionEvent event) {
-		Collection<Account> all_accounts = viewController.getAccounts();
-		AllAccountsReport report = new AllAccountsReport(all_accounts);
-		viewController.getFrameworkApplication().getFinCo().setReport(report);
-		GenerateReportOperation generateReport = new GenerateReportOperation(viewController.getFrameworkApplication().getFinCo());
-		viewController.getFrameworkApplication().getOperationManager().invoke(generateReport);
-
-		String reportDetails = report.getReport();
-
-		JDialogGenReport billFrm = new JDialogGenReport(this, reportDetails, "Report Details");
-		billFrm.setBounds(450, 20, 400, 350);
-		billFrm.show();
-//		viewController.generateReport();
-	}
 
 	// When the Exit button is pressed this code gets executed
 	// this will exit from the system
@@ -231,7 +201,7 @@ public class FinCoView extends JFrame {
 		 * JDialog_AddPAcc type object set the boundaries and show it
 		 */
 
-		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
+		JDialog_AddPAcc pac = new JDialog_AddPAcc(myFrame);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 
@@ -244,7 +214,7 @@ public class FinCoView extends JFrame {
 		        zip = "0";
 		    }
 			
-			this.viewController.createPerson(accountnr, clientName, street, city, state, Integer.parseInt(zip), email,
+			this.viewController.createPerson(accountNumber, clientName, street, city, state, Integer.parseInt(zip), email,
 					birthDate);
 			Collection<Account> accounts = this.viewController.getAccounts();
 			loadAccountData(accounts, model, JTable1);
@@ -256,7 +226,7 @@ public class FinCoView extends JFrame {
 		 * construct a JDialog_AddCompAcc type object set the boundaries and show it
 		 */
 
-		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myFrame);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 
@@ -269,7 +239,7 @@ public class FinCoView extends JFrame {
 		        zip = "0";
 		    }
 			
-			this.viewController.createCompany(accountnr, clientName, street, city, state, Integer.parseInt(zip), email,
+			this.viewController.createCompany(accountNumber, clientName, street, city, state, Integer.parseInt(zip), email,
 					noOfEmployee);
 			Collection<Account> accounts = this.viewController.getAccounts();
 			loadAccountData(accounts, model, JTable1);
@@ -280,10 +250,10 @@ public class FinCoView extends JFrame {
 		// get selected name
 		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 		if (selection >= 0) {
-			String accnr = (String) model.getValueAt(selection, 0);
+			String accountNumber = (String) model.getValueAt(selection, 0);
 
 			// Show the dialog for adding deposit amount for the current mane
-			JDialog_Deposit dep = new JDialog_Deposit(myframe, accnr);
+			JDialog_Deposit dep = new JDialog_Deposit(myFrame, accountNumber);
 			dep.setBounds(430, 15, 275, 140);
 			dep.show();
 
@@ -295,7 +265,7 @@ public class FinCoView extends JFrame {
 			viewController.deposit(acc, deposit);
 			model.setValueAt(String.valueOf(acc.getCurrentBalance()), selection, 4);
 		} else {
-			JOptionPane.showMessageDialog(JButton_Addinterest, "Please first select an account to deposit to.",
+			JOptionPane.showMessageDialog(JButton_AddInterest, "Please first select an account to deposit to.",
 					"Deposit", JOptionPane.WARNING_MESSAGE);
 		}
 	}
@@ -304,10 +274,10 @@ public class FinCoView extends JFrame {
 		// get selected name
 		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 		if (selection >= 0) {
-			String accnr = (String) model.getValueAt(selection, 0);
+			String accountNumber = (String) model.getValueAt(selection, 0);
 
 			// Show the dialog for adding withdraw amount for the current mane
-			JDialog_Withdraw wd = new JDialog_Withdraw(myframe, accnr);
+			JDialog_Withdraw wd = new JDialog_Withdraw(myFrame, accountNumber);
 			wd.setBounds(430, 15, 275, 140);
 			wd.show();
 
@@ -319,13 +289,13 @@ public class FinCoView extends JFrame {
 			viewController.withdraw(acc, withdrawAmount);
 			model.setValueAt(String.valueOf(acc.getCurrentBalance()), selection, 4);
 		} else {
-			JOptionPane.showMessageDialog(JButton_Addinterest, "Please first select an account to withdraw from.",
+			JOptionPane.showMessageDialog(JButton_AddInterest, "Please first select an account to withdraw from.",
 					"Withdraw", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
-	void JButtonAddinterest_actionPerformed(ActionEvent event) {
-		if (JOptionPane.showConfirmDialog(JButton_Addinterest, "Add interest to all accounts",
+	void JButtonAddInterest_actionPerformed(ActionEvent event) {
+		if (JOptionPane.showConfirmDialog(JButton_AddInterest, "Add interest to all accounts",
 				"Add interest to all accounts", JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION) {
 			viewController.addInterest();
 			loadAccountData(viewController.getAccounts(), model, JTable1);

@@ -1,8 +1,8 @@
 package framework.commands;
 
-public class CommandManager {
+public class OperationManager {
 
-    public CommandManager() {
+    public OperationManager() {
     }
 
     public void invoke(IOperation operation) {

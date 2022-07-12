@@ -5,22 +5,14 @@ import framework.models.*;
 import java.time.LocalDate;
 
 public class CreditCardAccount extends Account {
-
     private String expiryDate;
     private CreditCardType type;
 
-    public CreditCardAccount(Customer customer, String accountNum, CreditCardType type) {
-        super(customer, accountNum);
-        expiryDate = LocalDate.now().toString();
-        this.type = type;
-        this.setCurrentBalance(0);
-    }
-
-    public CreditCardAccount(Customer customer, String accountNum, CreditCardType type, String expiryDate) {
+    public CreditCardAccount(ICustomer customer, String accountNum, CreditCardType type, String expiryDate) {
         super(customer, accountNum);
         this.expiryDate = expiryDate;
         this.type = type;
-        this.setCurrentBalance(0);
+        this.setCurrentBalance(2000);
     }
 
     public String getExpiryDate() {
@@ -60,6 +52,7 @@ public class CreditCardAccount extends Account {
                 deposits += entry.getAmount();
             }
         }
+
         return deposits;
     }
 

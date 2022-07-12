@@ -1,21 +1,26 @@
 package framework.database;
 
-import framework.IFinco;
+import framework.IFinCo;
 import framework.models.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Repository  implements IRepository {
-	protected IFinco finco;
+public class Repository extends DBConnection implements IRepository {
+	protected IFinCo finco;
 	private String repoPath;
 
-	public Repository(IFinco finco) {
+	public Repository(IFinCo finco) {
 		this.finco = finco;
 	}
 
 	@Override
+	public void write() {
+		write(this.repoPath);
+	}
+
+	@Override
 	public void write(String path) {
-		/*JSONObject jsonObject = new JSONObject();
+		JSONObject jsonObject = new JSONObject();
 		JSONArray customers = new JSONArray();
 
 		System.out.println("==============");
@@ -69,13 +74,25 @@ public class Repository  implements IRepository {
 
 		jsonObject.put("customers", customers);
 
-		//this.write(repoPath, jsonObject);
+		this.write(repoPath, jsonObject);
+	}
 
-		 */
+	@Override
+	public void load() {
+		load(this.repoPath);
 	}
 
 	@Override
 	public void load(String path) {
+		JSONObject jsonObject = this.read(repoPath);
+
+		if (jsonObject == null)
+			return;
+
+		this.loadCustomer(jsonObject);
+
+		System.out.println(this.finco.getAccounts());
+		System.out.println(this.finco.getCustomers());
 	}
 
 	@Override

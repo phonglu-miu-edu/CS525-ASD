@@ -1,13 +1,13 @@
 package banking.database;
 
-import framework.IFinco;
+import framework.IFinCo;
 import framework.database.Repository;
 import framework.models.Customer;
 import org.json.simple.JSONArray;
 
 
 public class BankRepository extends Repository {
-	public BankRepository(IFinco finco) {
+	public BankRepository(IFinCo finco) {
 		super(finco);
 	}
 

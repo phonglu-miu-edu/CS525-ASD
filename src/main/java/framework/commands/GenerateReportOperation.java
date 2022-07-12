@@ -1,12 +1,12 @@
 package framework.commands;
 
-import framework.IFinco;
+import framework.IFinCo;
 
 public class GenerateReportOperation implements  IOperation{
 
-    private IFinco finCo;
+    private IFinCo finCo;
 
-    public GenerateReportOperation(IFinco finCo) {
+    public GenerateReportOperation(IFinCo finCo) {
         this.finCo = finCo;
 //        finCo.setReport(new AllAccountsReport(finCo.getAccounts()));
     }

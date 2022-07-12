@@ -1,6 +1,6 @@
 package banking.commands;
 
-import framework.IFinco;
+import framework.IFinCo;
 import framework.commands.IOperation;
 import framework.models.Account;
 import framework.models.Customer;
@@ -9,11 +9,11 @@ public class AddAccount implements IOperation {
     private final Customer customer;
     private String accountNum;
     private Integer type;
-    private final IFinco finCo;
+    private final IFinCo finCo;
 
     private Account account;
 
-    public AddAccount(Customer c, String a, Integer t, IFinco f) {
+    public AddAccount(Customer c, String a, Integer t, IFinCo f) {
         this.customer = c;
         this.finCo = f;
         this.accountNum = a;
