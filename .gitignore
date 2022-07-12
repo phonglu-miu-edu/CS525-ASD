@@ -1,3 +1,5 @@
-/.idea/
-/out/
-/bin/
+.idea
+out
+bin
+db.json
+ccard-db.json
