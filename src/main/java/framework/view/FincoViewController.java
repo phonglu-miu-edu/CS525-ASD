@@ -8,6 +8,15 @@ import framework.model.Entry;
 import java.util.Collection;
 
 public class FincoViewController implements IFincoViewController{
+    public IFramework frameworkApplication;
+    public FinCoView fincoView;
+    public ViewType type;
+
+
+    public FincoViewController(ViewType type) {
+        this.type = type;
+    }
+
     @Override
     public void setVisible() {
 

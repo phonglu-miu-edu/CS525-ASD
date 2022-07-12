@@ -1,46 +1,24 @@
 package framework;
 
 import framework.command.CommandManager;
-import framework.view.IFincoViewController;
+import framework.repository.IRepository;
+import framework.view.FincoViewController;
+import framework.view.ViewType;
 
 public class FrameworkApplication extends Framework{
-    @Override
-    public IFinco getFinCo() {
-        return null;
+    public static void main(String[] args) {
+        FincoViewController viewController = new FincoViewController(ViewType.BANK);
+        FinCo finCo = new FinCo();
+        CommandManager operationManager = new CommandManager();
+        IFramework frameworkApplication = new FrameworkApplication();
+
+        Framework.setUp(frameworkApplication, viewController, finCo, operationManager);
+
+//        viewController.setVisible();
     }
 
-    @Override
-    public void setFinCo(IFinco finCo) {
-
-    }
-
-    @Override
-    public IFincoViewController getViewController() {
-        return null;
-    }
-
-    @Override
-    public void setViewController(IFincoViewController ui) {
-
-    }
-
-    @Override
-    public CommandManager getCommandManager() {
-        return null;
-    }
-
-    @Override
-    public void setCommandManager(CommandManager cmdManager) {
-
-    }
-
-    @Override
-    public void setFrameworkApplication(IFramework frameworkApplication) {
-
-    }
-
-    @Override
     public void initData() {
-
+        IRepository repo = this.viewController.getFrameworkApplication().getFinCo().getRepository();
+        repo.load(repo.getRepoPath());
     }
 }
