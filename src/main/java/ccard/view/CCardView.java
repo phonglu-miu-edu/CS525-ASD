@@ -20,6 +20,7 @@ public class CCardView extends FinCoView {
     public CCardView(ICCardViewController controller, ViewType viewType) {
         super(controller, viewType);
         this.controller = controller;
+
         setTitle("Credit Card Processing Application");
     }
 

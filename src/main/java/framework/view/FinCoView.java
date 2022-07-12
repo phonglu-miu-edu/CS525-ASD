@@ -1,11 +1,10 @@
 package framework.view;
 
-import ccard.report.MonthlyBillingReport;
-import framework.IFramework;
 import framework.command.ReportGenerate;
-import framework.model.Account;
 import framework.model.IAccount;
 import framework.model.Person;
+import framework.reports.AllAccountsReport;
+import framework.reports.IReport;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -38,7 +37,7 @@ public class FinCoView extends JFrame {
         this.viewType = viewType;
         myFrame = this;
 
-        setTitle("Banking Application");
+        setTitle("Framework Application");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout(0, 0));
         setSize(600, 350);
@@ -259,19 +258,19 @@ public class FinCoView extends JFrame {
     }
 
     public void JButtonReportGenerate_actionPerformed(ActionEvent event) {
-        IFramework framework = viewController.getFrameworkApplication();
-        Collection<IAccount> all_accounts = viewController.getAccounts();
-        MonthlyBillingReport billingReport = new MonthlyBillingReport(all_accounts);
-        framework.getFinCo().setReport(billingReport);
-        ReportGenerate reportGenerate = new ReportGenerate(framework.getFinCo());
-        framework.getCommandManager().invoke(reportGenerate);
+            Collection<IAccount> all_accounts = viewController.getAccounts();
+            IReport report = new AllAccountsReport(all_accounts);
+            viewController.getFrameworkApplication().getFinCo().setReport(report);
+            ReportGenerate generateReport = new ReportGenerate(viewController.getFrameworkApplication().getFinCo());
+            viewController.getFrameworkApplication().getCommandManager().invoke(generateReport);
 
-        String billingReportDetails = billingReport.getBillingReport();
+            String reportDetails = report.getReport();
 
-        JDialog_GenReport billFrm = new JDialog_GenReport(this, billingReportDetails, "Monthly billing report");
-        billFrm.setBounds(450, 20, 400, 350);
-        billFrm.show();
-    }
+            JDialog_GenReport billFrm = new JDialog_GenReport(this, reportDetails, "Report Details");
+            billFrm.setBounds(450, 20, 400, 350);
+            billFrm.show();
+//		viewController.generateReport();
+        }
 
     public void JButtonDeposit_actionPerformed(ActionEvent event) {
         // get selected name

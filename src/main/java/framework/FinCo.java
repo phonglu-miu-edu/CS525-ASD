@@ -3,6 +3,7 @@ package framework;
 import framework.factory.AccountFactory;
 import framework.factory.CustomerFactory;
 import framework.model.*;
+import framework.reports.IReport;
 import framework.repository.IRepository;
 import framework.repository.Repository;
 

@@ -1,6 +1,7 @@
 package framework;
 
 import framework.model.*;
+import framework.reports.IReport;
 import framework.repository.IRepository;
 
 import java.util.Collection;

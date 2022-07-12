@@ -1,10 +1,9 @@
 package ccard.report;
 
 import ccard.model.CreditCardAccount;
-import framework.model.Account;
 import framework.model.IAccount;
 import framework.model.ICustomer;
-import framework.model.IReport;
+import framework.reports.IReport;
 
 import java.util.Collection;
 
@@ -36,7 +35,7 @@ public class MonthlyBillingReport implements IReport {
         }
     }
 
-    public String getBillingReport() {
+    public String getReport() {
         return billingReport;
     }
 }

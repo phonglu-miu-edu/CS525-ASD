@@ -23,6 +23,8 @@ public class BankView extends FinCoView {
         super(bankViewController, viewType);
 
         this.bankViewController = bankViewController;
+
+        setTitle("Bank Application");
         setSize(650, 330);
     }
 
