@@ -9,7 +9,7 @@ import framework.view.FinCoView;
 import javax.swing.*;
 import java.awt.*;
 
-public class JDialog_AddCreditCardAccount extends JDialog {
+public class JDialog_AddPersonalCCAccount extends JDialog {
     private ICCardViewController controller;
 	private FinCoView parent;
 
@@ -40,7 +40,7 @@ public class JDialog_AddCreditCardAccount extends JDialog {
 	JRadioButton goldRB = new JRadioButton();
 	JRadioButton silverRB = new JRadioButton();
     
-	public JDialog_AddCreditCardAccount(FinCoView parent, ICCardViewController controller) {
+	public JDialog_AddPersonalCCAccount(FinCoView parent, ICCardViewController controller) {
 		super(parent);
 		this.controller = controller;
 		this.parent = parent;
@@ -51,7 +51,7 @@ public class JDialog_AddCreditCardAccount extends JDialog {
 		// what Visual Cafe can generate, or Visual Cafe may be unable to back
 		// parses your Java file into its visual envirenment. 
 		//{{ INIT_CONTROLS 
-		setTitle("Add personal credit card account");
+		setTitle("Add Personal credit card account");
 		setModal(true);
 		getContentPane().setLayout(null);
 		setSize(301,393);
@@ -200,7 +200,7 @@ public class JDialog_AddCreditCardAccount extends JDialog {
 		else
 			cardType = new Copper();
 
-		this.controller.createCreditCardAccount(ccNumber, clientName, street, city, state, zip, email, birthDate, expiryDate, cardType);
+		this.controller.createPersonalAccount(ccNumber, clientName, street, city, state, zip, email, birthDate, expiryDate, cardType);
 		this.parent.newaccount = true;
 
 		this.parent.viewController.getFrameworkApplication().getFinCo().getRepository().write();

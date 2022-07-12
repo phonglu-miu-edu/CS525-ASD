@@ -1,10 +1,12 @@
 package ccard;
 
-import ccard.model.CreditCardAccount;
 import ccard.model.CreditCardType;
 import framework.IFinCo;
+import framework.model.Account;
+import framework.model.Customer;
+import framework.model.IAccount;
 import framework.model.ICustomer;
 
 public interface ICCardFinCo extends IFinCo {
-    CreditCardAccount createAccount(ICustomer customer, String accountNum, CreditCardType type, String expiryDate);
+    IAccount createAccount(ICustomer customer, String accountNum, CreditCardType type, String expiryDate);
 }

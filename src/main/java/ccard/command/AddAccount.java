@@ -3,14 +3,14 @@ package ccard.command;
 import ccard.ICCardFinCo;
 import ccard.model.CreditCardType;
 import framework.command.ICommand;
-import framework.model.Account;
+import framework.model.IAccount;
 import framework.model.ICustomer;
 
 public class AddAccount implements ICommand {
     private final ICustomer customer;
     private String expiryDate;
     private final ICCardFinCo cCardFinCo;
-    private Account account;
+    private IAccount account;
     private String accountNum;
     private CreditCardType type;
 
@@ -21,12 +21,13 @@ public class AddAccount implements ICommand {
         this.accountNum = accountNum;
         this.type = type;
     }
+
     @Override
     public void execute() {
         account = this.cCardFinCo.createAccount(customer, accountNum, type, expiryDate);
     }
 
-    public Account getAccount() {
+    public IAccount getAccount() {
         return this.account;
     }
 }

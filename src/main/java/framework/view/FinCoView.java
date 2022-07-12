@@ -40,7 +40,7 @@ public class FinCoView extends JFrame {
         setTitle("Framework Application");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout(0, 0));
-        setSize(600, 350);
+        setSize(580, 300);
         setVisible(false);
         JPanel1.setLayout(null);
         getContentPane().add(BorderLayout.CENTER, JPanel1);

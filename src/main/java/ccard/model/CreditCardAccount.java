@@ -2,13 +2,15 @@ package ccard.model;
 
 import framework.model.*;
 
+import java.time.LocalDate;
+
 public class CreditCardAccount extends Account {
     private String expiryDate;
     private CreditCardType type;
 
     public CreditCardAccount(ICustomer customer, String accountNum, CreditCardType type, String expiryDate) {
         super(customer, accountNum);
-        this.expiryDate = expiryDate;
+        this.expiryDate = expiryDate == "" ? LocalDate.now().toString() : expiryDate;
         this.type = type;
         this.setCurrentBalance(2000);
     }
