@@ -1,10 +1,8 @@
 package framework.model;
 
-import java.util.Date;
-
 public class WithdrawEntry extends Entry{
 
-    public WithdrawEntry(Account account, double amount) {
+    public WithdrawEntry(IAccount account, double amount) {
         super(account, amount);
     }
 

@@ -5,9 +5,9 @@ import java.util.Date;
 public abstract class Entry {
     protected double amount;
     protected Date date;
-    protected Account account;
+    protected IAccount account;
 
-    public Entry(Account account, double amount) {
+    public Entry(IAccount account, double amount) {
         this.account = account;
         this.amount = amount;
         this.date = new Date();
@@ -21,7 +21,7 @@ public abstract class Entry {
         return date;
     }
 
-    public Account getAccount() {
+    public IAccount getAccount() {
         return account;
     }
 

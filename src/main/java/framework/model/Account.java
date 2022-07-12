@@ -3,16 +3,16 @@ package framework.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Account implements IAccount{
-
-    private Customer customer;
+public class Account implements IAccount {
+    private ICustomer customer;
     private String accountNum;
     private double currentBalance;
     private Collection<Entry> entryHistory = new ArrayList<>();
+    INotification<String> notification;
 
     protected double interestRate;
 
-    public Account(Customer customer, String accountNum) {
+    public Account(ICustomer customer, String accountNum) {
         this.customer = customer;
         this.accountNum = accountNum;
         this.currentBalance = 0;
@@ -40,7 +40,7 @@ public class Account implements IAccount{
     }
 
     @Override
-    public void addinterest() {
+    public void addInterest() {
         this.currentBalance += this.currentBalance * getInterestRate();
     }
 
@@ -54,7 +54,7 @@ public class Account implements IAccount{
         return 0;
     }
 
-    public Customer getCustomer() {
+    public ICustomer getCustomer() {
         return customer;
     }
 
@@ -95,4 +95,12 @@ public class Account implements IAccount{
         currentBalance += amount;
     }
 
+    public INotification<String> getNotification() {
+        return notification;
+    }
+
+    public void setNotification(INotification<String> notification)
+    {
+        this.notification = notification;
+    }
 }

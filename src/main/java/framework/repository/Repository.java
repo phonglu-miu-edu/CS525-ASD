@@ -1,169 +1,176 @@
 package framework.repository;
 
-import framework.IFinco;
+import framework.IFinCo;
 import framework.model.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Repository extends ConnectionDb implements IRepository {
-    protected IFinco finco;
-    private String repoPath;
+	protected IFinCo finCo;
+	private String repoPath;
 
-    public Repository(IFinco finco) {
-        this.finco = finco;
-    }
+	public Repository(IFinCo finCo) {
+		this.finCo = finCo;
+	}
 
-    @Override
-    public void write(String path) {
-        JSONObject jsonObject = new JSONObject();
-        JSONArray customers = new JSONArray();
+	@Override
+	public void write() {
+		write(this.repoPath);
+	}
 
-        System.out.println("==============");
-        System.out.println(this.finco.getCustomers());
-        System.out.println("--------------");
+	@Override
+	public void write(String path) {
+		JSONObject jsonObject = new JSONObject();
+		JSONArray customers = new JSONArray();
 
-        for (Customer customer : this.finco.getCustomers()) {
-            JSONObject c = new JSONObject();
-            JSONArray accs = new JSONArray();
+		System.out.println("==============");
+		System.out.println(this.finCo.getCustomers());
+		System.out.println("--------------");
 
-            c.put("name", customer.getName());
-            c.put("city", customer.getCity());
-            c.put("email", customer.getEmail());
-            c.put("state", customer.getState());
-            c.put("street", customer.getStreet());
-            c.put("zip", customer.getZip());
+		for (Customer customer : this.finCo.getCustomers()) {
+			JSONObject c = new JSONObject();
+			JSONArray accs = new JSONArray();
 
-            if(customer.getClass().equals(Organization.class))
-                c.put("type", "company");
-            else if(customer.getClass().equals(Person.class))
-                c.put("type", "person");
+			c.put("name", customer.getName());
+			c.put("city", customer.getCity());
+			c.put("email", customer.getEmail());
+			c.put("state", customer.getState());
+			c.put("street", customer.getStreet());
+			c.put("zip", customer.getZip());
+			
+			if(customer.getClass().equals(Organization.class))
+					c.put("type", "company");
+			else if(customer.getClass().equals(Person.class))
+				c.put("type", "person");
 
-            for (Account account : customer.getAccounts()) {
-                JSONObject a = new JSONObject();
-                JSONArray entries = new JSONArray();
+			for (Account account : customer.getAccounts()) {
+				JSONObject a = new JSONObject();
+				JSONArray entries = new JSONArray();
 
-                a.put("accountNum", account.getAccountNum());
-                a.put("currentBalance", account.getCurrentBalance());
+				a.put("accountNum", account.getAccountNum());
+				a.put("currentBalance", account.getCurrentBalance());
 
-                for (Entry entry : account.getEntryHistory()) {
-                    JSONObject e = new JSONObject();
+				for (Entry entry : account.getEntryHistory()) {
+					JSONObject e = new JSONObject();
 
-                    e.put("amount", entry.getAmount());
-                    e.put("date", entry.getDate().toString());
-                    if (entry instanceof DepositEntry) {
-                        e.put("type", "deposit");
-                    } else {
-                        e.put("type", "withdraw");
-                    }
+					e.put("amount", entry.getAmount());
+					e.put("date", entry.getDate().toString());
+					if (entry instanceof DepositEntry) {
+						e.put("type", "deposit");
+					} else {
+						e.put("type", "withdraw");
+					}
 
-                    entries.add(e);
-                }
+					entries.add(e);
+				}
 
-                a.put("entries", entries);
-                accs.add(a);
-            }
+				a.put("entries", entries);
+				accs.add(a);
+			}
 
-            c.put("accounts", accs);
-            customers.add(c);
-        }
+			c.put("accounts", accs);
+			customers.add(c);
+		}
 
-        jsonObject.put("customers", customers);
+		jsonObject.put("customers", customers);
 
-        this.write(repoPath, jsonObject);
-    }
+		this.write(repoPath, jsonObject);
+	}
 
-    @Override
-    public void load(String path) {
-        JSONObject jsonObject = this.read(repoPath);
+	@Override
+	public void load() {
+		load(this.repoPath);
+	}
 
-//        this.finco.getAccounts().clear();
-//        this.finco.getCustomers().clear();
+	@Override
+	public void load(String path) {
+		JSONObject jsonObject = this.read(repoPath);
 
-        if (jsonObject == null)
-            return;
+		if (jsonObject == null)
+			return;
 
-        this.loadCustomer(jsonObject);
+		this.loadCustomer(jsonObject);
 
-        System.out.println(this.finco.getAccounts());
-        System.out.println(this.finco.getCustomers());
-    }
+		System.out.println(this.finCo.getAccounts());
+		System.out.println(this.finCo.getCustomers());
+	}
 
-    @Override
-    public void loadAccount(Customer customer, JSONArray jsonArray) {
-        if (jsonArray == null)
-            return;
+	@Override
+	public void loadAccount(ICustomer customer, JSONArray jsonArray) {
+		if (jsonArray == null)
+			return;
 
-        for (int i = 0; i < jsonArray.size(); i++) {
-            JSONObject o = (JSONObject) jsonArray.get(i);
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JSONObject o = (JSONObject) jsonArray.get(i);
 
-            Account a = new Account(customer, (String) o.get("accountNum"));
+            Account a = new Account(
+                customer,
+                (String) o.get("accountNum")
+            );			
 
-            a.setCurrentBalance(Double.parseDouble(o.get("currentBalance").toString()));
-            customer.addAccount(a);
-            //a.setNotification(new Email(customer.getEmail()));
+			a.setCurrentBalance(Double.parseDouble(o.get("currentBalance").toString()));
+			customer.addAccount(a);
+			a.setNotification(new Email(customer.getEmail()));
+			
+			loadEntry(a, (JSONArray) o.get("entries"));
 
-            loadEntry(a, (JSONArray) o.get("entries"));
+			this.finCo.getAccounts().add(a);
+		}
+	}
 
-            this.finco.getAccounts().add(a);
-        }
-    }
+	@Override
+	public void loadEntry(IAccount account, JSONArray jsonArray) {
+		if (jsonArray == null)
+			return;
 
-    @Override
-    public void loadEntry(Account account, JSONArray jsonArray) {
-        if (jsonArray == null)
-            return;
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JSONObject o = (JSONObject) jsonArray.get(i);
 
-        for (int i = 0; i < jsonArray.size(); i++) {
-            JSONObject o = (JSONObject) jsonArray.get(i);
+			if (o.get("type").equals("deposit")) {
+				Entry a = new DepositEntry(account, Double.parseDouble(o.get("amount").toString()));
 
-            if (o.get("type").equals("deposit")) {
-                Entry a = new DepositEntry(account, Double.parseDouble(o.get("amount").toString()));
+				account.getEntryHistory().add(a);
+			} else {
+				Entry a = new WithdrawEntry(account, Double.parseDouble(o.get("amount").toString()));
 
-                account.getEntryHistory().add(a);
-//				account.changeBalanceByAmount(Double.parseDouble(o.get("amount").toString()));
-            } else {
-                Entry a = new WithdrawEntry(account, Double.parseDouble(o.get("amount").toString()));
+				account.getEntryHistory().add(a);
+			}
+		}
+	}
 
-                account.getEntryHistory().add(a);
-//				account.changeBalanceByAmount(-1 * Double.parseDouble(o.get("amount").toString()));
-            }
-        }
-    }
+	@Override
+	public void loadCustomer(JSONObject data) {
+		JSONArray arr = (JSONArray) data.get("customers");
+		if (arr == null)
+			return;
 
-    @Override
-    public void loadCustomer(JSONObject data) {
-        JSONArray arr = (JSONArray) data.get("customers");
-        if (arr == null)
-            return;
+		for (Object value : arr) {
+			JSONObject o = (JSONObject) value;
+			Customer c;
 
-        for (int i = 0; i < arr.size(); i++) {
-            JSONObject o = (JSONObject) arr.get(i);
-            Customer c;
+			if (o.get("type") != null && o.get("type").equals("company")) {
+				c = new Organization((String) o.get("name"), (String) o.get("street"), (String) o.get("city"),
+					(String) o.get("state"), Integer.parseInt(o.get("zip").toString()), (String) o.get("email"),
+					(String) o.get("noEmployees"));
+			} else {
+				c = new Person((String) o.get("name"), (String) o.get("street"), (String) o.get("city"),
+					(String) o.get("state"), Integer.parseInt(o.get("zip").toString()), (String) o.get("email"),
+					(String) o.get("birthDate"));
+			}
 
-            if (o.get("type") != null && o.get("type").equals("company")) {
-                c = new Organization((String) o.get("name"), (String) o.get("street"), (String) o.get("city"),
-                        (String) o.get("state"), Integer.parseInt(o.get("zip").toString()), (String) o.get("email"),
-                        (String) o.get("noEmployees"));
-            } else {
-                c = new Person((String) o.get("name"), (String) o.get("street"), (String) o.get("city"),
-                        (String) o.get("state"), Integer.parseInt(o.get("zip").toString()), (String) o.get("email"),
-                        (String) o.get("birthDate"));
-            }
+			this.finCo.getCustomers().add(c);
 
-            this.finco.getCustomers().add(c);
+			loadAccount(c, (JSONArray) o.get("accounts"));
+		}
+	}
 
-            loadAccount(c, (JSONArray) o.get("accounts"));
-        }
-    }
+	@Override
+	public void setRepoPath(String path) {
+		this.repoPath = path;
+	}
 
-    @Override
-    public void setRepoPath(String path) {
-        this.repoPath = path;
-    }
-
-    @Override
-    public String getRepoPath() {
-        return repoPath;
-    }
+	@Override
+	public String getRepoPath() {
+		return repoPath;
+	}
 }
-

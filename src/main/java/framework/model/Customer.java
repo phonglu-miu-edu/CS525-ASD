@@ -3,7 +3,7 @@ package framework.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Customer implements ICustomer{
+public class Customer implements ICustomer {
 
     private String name;
     private String street;

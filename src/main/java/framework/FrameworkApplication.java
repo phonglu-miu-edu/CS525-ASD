@@ -1,26 +1,26 @@
 package framework;
 
 import framework.command.CommandManager;
-import framework.view.IFincoViewController;
+import framework.view.IFinCoViewController;
 
 public class FrameworkApplication extends Framework{
     @Override
-    public IFinco getFinCo() {
+    public IFinCo getFinCo() {
         return null;
     }
 
     @Override
-    public void setFinCo(IFinco finCo) {
+    public void setFinCo(IFinCo finCo) {
 
     }
 
     @Override
-    public IFincoViewController getViewController() {
+    public IFinCoViewController getViewController() {
         return null;
     }
 
     @Override
-    public void setViewController(IFincoViewController ui) {
+    public void setViewController(IFinCoViewController ui) {
 
     }
 

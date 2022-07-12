@@ -1,6 +1,5 @@
 package framework;
 
-import ccard.CreditCardType;
 import framework.factory.AccountFactory;
 import framework.factory.CustomerFactory;
 import framework.model.*;
@@ -12,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class FinCo implements IFinco{
+public class FinCo implements IFinCo {
 
     public Collection<Account> accounts = new ArrayList<>();
     public Collection<Customer> customers = new ArrayList<>();
@@ -81,17 +80,7 @@ public class FinCo implements IFinco{
     }
 
     @Override
-    public Account createAccount(Customer customer, String accountNum, CreditCardType type, String expiryDate) {
-        return null;
-    }
-
-    @Override
-    public Account createAccount(Customer customer, String accountNum, CreditCardType type) {
-        return null;
-    }
-
-    @Override
-    public void report()  {
+    public void generateReport()  {
         this.report.generate();
     }
 
@@ -101,9 +90,9 @@ public class FinCo implements IFinco{
     }
 
     @Override
-    public void interest() {
+    public void addInterest() {
         for (Account acc : accounts) {
-            acc.addinterest();
+            acc.addInterest();
         }
 
         repository.write(repository.getRepoPath());
@@ -117,7 +106,7 @@ public class FinCo implements IFinco{
 
         String message = "Withdrawal amount of " + amount + " is made at "
                 + DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
-        //sendNotification(message, account, amount);
+        sendNotification(message, account, amount);
 
         repository.write(repository.getRepoPath());
 
@@ -136,10 +125,21 @@ public class FinCo implements IFinco{
 
         String message = "Deposit amount of " + amount + " is made at "
                 + DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
-//        sendNotification(message, account, amount);
+        sendNotification(message, account, amount);
 
         this.repository.write(repository.getRepoPath());
 
         return entry;
+    }
+
+    public void sendNotification(String message, Account account, double amount) {
+        ICustomer customer = account.getCustomer();
+        if (account.getNotification() != null) {
+            if (customer instanceof Organization) {
+                account.getNotification().sendNotification(message);
+            } else if (amount > 400 || account.getCurrentBalance() < 0) {
+                account.getNotification().sendNotification(message);
+            }
+        }
     }
 }

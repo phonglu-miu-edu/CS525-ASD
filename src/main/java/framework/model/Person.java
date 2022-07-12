@@ -1,6 +1,6 @@
 package framework.model;
 
-public class Person extends Customer{
+public class Person extends Customer {
     private String birthDate;
 
     public Person(String name, String street, String city, String state, Integer zip, String email, String birthDate) {
