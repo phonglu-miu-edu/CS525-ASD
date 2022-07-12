@@ -47,7 +47,7 @@ public class CreditCardAccount extends Account {
     public double getTotalCurrentMonthCredits() {
         // for now go through all the payments for this account
         double deposits = 0;
-        for (IEntry entry: getEntryHistory()) {
+        for (Entry entry: getEntryHistory()) {
             if (entry instanceof DepositEntry) {
                 deposits += entry.getAmount();
             }
@@ -59,7 +59,7 @@ public class CreditCardAccount extends Account {
     public double getTotalCurrentMonthCharges() {
         // for now go through all the withdraws for this account
         double withdraws = 0;
-        for (IEntry entry: getEntryHistory()) {
+        for (Entry entry: getEntryHistory()) {
             if (entry instanceof WithdrawEntry) {
                 withdraws += entry.getAmount();
             }

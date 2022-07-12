@@ -50,7 +50,7 @@ public class Repository extends ConnectionDb implements IRepository {
 				a.put("accountNum", account.getAccountNum());
 				a.put("currentBalance", account.getCurrentBalance());
 
-				for (IEntry entry : account.getEntryHistory()) {
+				for (Entry entry : account.getEntryHistory()) {
 					JSONObject e = new JSONObject();
 
 					e.put("amount", entry.getAmount());

@@ -102,7 +102,7 @@ public class CreditCardRepository extends Repository {
                     a.put("accType", "copper");
                 }
 
-                for (IEntry entry : account.getEntryHistory()) {
+                for (Entry entry : account.getEntryHistory()) {
                     JSONObject e = new JSONObject();
 
                     e.put("amount", entry.getAmount());

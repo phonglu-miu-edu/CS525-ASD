@@ -76,7 +76,7 @@ public class BankRepository extends Repository {
 					a.put("accType", "saving");
 				}
 
-				for (IEntry entry : account.getEntryHistory()) {
+				for (Entry entry : account.getEntryHistory()) {
 					JSONObject e = new JSONObject();
 
 					e.put("amount", entry.getAmount());

@@ -100,9 +100,9 @@ public class FinCo implements IFinCo {
     }
 
     @Override
-    public IEntry withdraw(IAccount account, double amount) {
+    public Entry withdraw(IAccount account, double amount) {
         account.changeBalanceByAmount(-1 * amount);
-        IEntry entry = new WithdrawEntry(account, amount);
+        Entry entry = new WithdrawEntry(account, amount);
         account.addEntryHistory(entry);
 
         String message = "Withdrawal amount of " + amount + " is made at "
@@ -115,13 +115,13 @@ public class FinCo implements IFinCo {
     }
 
     @Override
-    public IEntry deposit(IAccount account, double amount) {
+    public Entry deposit(IAccount account, double amount) {
         if (amount < 0) {
             return null;
         }
 
         account.changeBalanceByAmount(amount);
-        IEntry entry = new DepositEntry(account, amount);
+        Entry entry = new DepositEntry(account, amount);
         account.addEntryHistory(entry);
 
         String message = "Deposit amount of " + amount + " is made at "

@@ -27,9 +27,9 @@ public class CCardFinCo extends FinCo implements ICCardFinCo {
     }
 
     @Override
-    public IEntry withdraw(IAccount account, double amount) {
+    public Entry withdraw(IAccount account, double amount) {
         account.changeBalanceByAmount(-1 * amount);
-        IEntry entry = new WithdrawEntry(account, amount);
+        Entry entry = new WithdrawEntry(account, amount);
         account.addEntryHistory(entry);
 
         if (amount > 600) {

@@ -3,9 +3,9 @@ package framework.view;
 import framework.IFramework;
 import framework.command.*;
 import framework.factory.AccountFactory;
+import framework.model.Entry;
 import framework.model.IAccount;
 import framework.model.ICustomer;
-import framework.model.IEntry;
 
 import java.util.Collection;
 
@@ -128,14 +128,14 @@ public class FinCoViewController implements IFinCoViewController {
         return null;
     }
 
-    public IEntry withdraw(IAccount account, double amount) {
+    public Entry withdraw(IAccount account, double amount) {
         Withdraw withdraw = new Withdraw(account, amount, frameworkApplication.getFinCo());
         frameworkApplication.getCommandManager().invoke(withdraw);
 
         return withdraw.getEntry();
     }
 
-    public IEntry deposit(IAccount account, double amount) {
+    public Entry deposit(IAccount account, double amount) {
         Deposit deposit = new Deposit(account, amount, frameworkApplication.getFinCo());
         frameworkApplication.getCommandManager().invoke(deposit);
 

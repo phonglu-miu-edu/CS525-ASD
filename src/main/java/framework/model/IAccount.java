@@ -14,9 +14,9 @@ public interface IAccount {
 
     void setNotification(INotification<String> notification);
 
-    Collection<IEntry> getEntryHistory();
+    Collection<Entry> getEntryHistory();
 
-    void addEntryHistory(IEntry entry);
+    void addEntryHistory(Entry entry);
 
      void changeBalanceByAmount(double amount);
 

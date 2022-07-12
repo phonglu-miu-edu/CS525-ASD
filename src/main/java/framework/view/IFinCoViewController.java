@@ -29,7 +29,7 @@ public interface IFinCoViewController {
 
     ICustomer findCustomerByName(String name);
 
-    IEntry withdraw(IAccount account, double amount);
+    Entry withdraw(IAccount account, double amount);
 
-    IEntry deposit(IAccount account, double amount);
+    Entry deposit(IAccount account, double amount);
 }
