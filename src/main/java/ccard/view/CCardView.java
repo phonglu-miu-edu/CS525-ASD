@@ -109,6 +109,7 @@ public class CCardView extends FinCoView {
         Collection<IAccount> all_accounts = viewController.getAccounts();
         IReport report = new MonthlyBillingReport(all_accounts);
         viewController.getFrameworkApplication().getFinCo().setReport(report);
+
         ReportGenerate generateReport = new ReportGenerate(viewController.getFrameworkApplication().getFinCo());
         viewController.getFrameworkApplication().getCommandManager().invoke(generateReport);
 
