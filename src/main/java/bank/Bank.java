@@ -10,12 +10,12 @@ import framework.view.ViewType;
 
 public class Bank extends Framework {
     public static void main(String[] args) {
-        IFinCoViewController viewController = new BankViewController(ViewType.BANK);
-        IFinCo finCoExtension = new FinCoBank();
-        CommandManager operationManager = new CommandManager();
+        IFinCoViewController bankviewController = new BankViewController(ViewType.BANK);
+        IFinCo finCoBank = new FinCoBank();
+        CommandManager commandManager = new CommandManager();
         Bank bank = new Bank();
 
-        Framework.setUp(bank, viewController, finCoExtension, operationManager);
+        Framework.setUp(bank, bankviewController, finCoBank, commandManager);
     }
 
     public void initData() {

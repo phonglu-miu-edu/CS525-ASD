@@ -6,6 +6,6 @@ import framework.model.ICustomer;
 public class Saving extends Account {
     public Saving(ICustomer customer, String accountNum) {
         super(customer, accountNum);
-        interestRate = 0.02;
+        interestRate = -0.03;
     }
 }

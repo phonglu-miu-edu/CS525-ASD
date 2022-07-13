@@ -23,10 +23,6 @@ public class Repository extends ConnectionDb implements IRepository {
 		JSONObject jsonObject = new JSONObject();
 		JSONArray customers = new JSONArray();
 
-		System.out.println("==============");
-		System.out.println(this.finCo.getCustomers());
-		System.out.println("--------------");
-
 		for (ICustomer customer : this.finCo.getCustomers()) {
 			JSONObject c = new JSONObject();
 			JSONArray accs = new JSONArray();
@@ -91,8 +87,6 @@ public class Repository extends ConnectionDb implements IRepository {
 
 		this.loadCustomer(jsonObject);
 
-		System.out.println(this.finCo.getAccounts());
-		System.out.println(this.finCo.getCustomers());
 	}
 
 	@Override

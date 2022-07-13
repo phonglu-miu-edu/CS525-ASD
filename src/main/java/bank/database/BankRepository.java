@@ -43,8 +43,6 @@ public class BankRepository extends Repository {
 		JSONObject jsonObject = new JSONObject();
 		JSONArray customers = new JSONArray();
 
-		System.out.println(this.finCo.getCustomers());
-
 		for (ICustomer customer : this.finCo.getCustomers()) {
 			JSONObject c = new JSONObject();
 			JSONArray accs = new JSONArray();
@@ -60,8 +58,6 @@ public class BankRepository extends Repository {
 				c.put("type", "company");
 			else if (customer.getClass().equals(Person.class))
 				c.put("type", "person");
-
-			System.out.println(customer.getAccounts());
 
 			for (IAccount account : customer.getAccounts()) {
 				JSONObject a = new JSONObject();

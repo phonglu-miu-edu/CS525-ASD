@@ -17,11 +17,11 @@ public class AllAccountsReport implements IReport {
     @Override
     public void generate() {
 
-        report = "Acc num\t\tCurr Balance\t\tNo. entries\t\tCust Name" + "\n\n\n";
+        report = "Acc num\t\tCurr Balance\t\tNo. entries\t\tCust Name" + "\n\n";
 
         for (IAccount account: accounts) {
             report += account.getAccountNum() + "\t\t" + account.getCurrentBalance() + "\t\t"
-                    + account.getEntryHistory().size() + "\t\t" + account.getCustomer().getName()+ "\n\n\n";
+                    + account.getEntryHistory().size() + "\t\t" + account.getCustomer().getName()+ "\n\n";
         }
     }
 

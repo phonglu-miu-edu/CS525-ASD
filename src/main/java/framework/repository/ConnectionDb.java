@@ -22,9 +22,6 @@ public class ConnectionDb implements IConnectionDb{
 
         try {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(path));
-
-            System.out.println(jsonObject);
-
             return jsonObject;
         } catch (IOException | ParseException e) {
 //            e.printStackTrace();

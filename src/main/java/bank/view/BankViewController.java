@@ -31,26 +31,13 @@ public class BankViewController extends FinCoViewController implements IBankView
         ICustomer customer = findCustomerByName(name);
 
         if (customer == null) {
-            AddPerson addPerson = new AddPerson(
-                    name,
-                    street,
-                    city,
-                    state,
-                    zip,
-                    email,
-                    birthDate,
-                    frameworkApplication.getFinCo()
-            );
-
+            AddPerson addPerson = new AddPerson(name, street, city, state, zip, email, birthDate,frameworkApplication.getFinCo());
             frameworkApplication.getCommandManager().invoke(addPerson);
-
             customer = addPerson.getCustomer();
         }
 
         AddAccount addAccount = new AddAccount(customer, accountNum, type, frameworkApplication.getFinCo());
-
         frameworkApplication.getCommandManager().invoke(addAccount);
-
         frameworkApplication.getFinCo().getRepository().write();
     }
     
@@ -58,26 +45,13 @@ public class BankViewController extends FinCoViewController implements IBankView
         ICustomer customer = findCustomerByName(name);
 
         if (customer == null) {
-        	AddCompany addCompany = new AddCompany(
-                    name,
-                    street,
-                    city,
-                    state,
-                    zip,
-                    email,
-                    noOfEmployee,
-                    frameworkApplication.getFinCo()
-            );
-
+        	AddCompany addCompany = new AddCompany(name, street, city, state, zip, email, noOfEmployee, frameworkApplication.getFinCo());
             frameworkApplication.getCommandManager().invoke(addCompany);
-
             customer = addCompany.getCustomer();
         }
 
         AddAccount addAccount = new AddAccount(customer, accountNum, type, frameworkApplication.getFinCo());
-
         frameworkApplication.getCommandManager().invoke(addAccount);
-
         frameworkApplication.getFinCo().getRepository().write();
     }
 }
