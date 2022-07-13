@@ -31,7 +31,6 @@ public class MonthlyBillingReport implements IReport {
                 "Total Charges = $" + ccAccount.getTotalCurrentMonthCharges() + "\n" +
                 "New balance = $" + ccAccount.getNewBalance() + "\n" +
                 "Total amount due = $" + ccAccount.getTotalAmountDue() + "\n\n\n";
-
         }
     }
 

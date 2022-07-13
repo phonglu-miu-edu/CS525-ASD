@@ -10,7 +10,7 @@ public class CreditCardAccount extends Account {
 
     public CreditCardAccount(ICustomer customer, String accountNum, CreditCardType type, String expiryDate) {
         super(customer, accountNum);
-        this.expiryDate = expiryDate == "" ? LocalDate.now().toString() : expiryDate;
+        this.expiryDate = expiryDate.equals("") ? LocalDate.now().toString() : expiryDate;
         this.type = type;
         this.setCurrentBalance(2000);
     }
@@ -19,16 +19,8 @@ public class CreditCardAccount extends Account {
         return expiryDate;
     }
 
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
     public double getCurrentMonthlyBalance() {
         return super.getCurrentBalance();
-    }
-
-    public double getTotalMonthlyCredits() {
-        return 0;
     }
 
     public CreditCardType getType() {
@@ -79,7 +71,6 @@ public class CreditCardAccount extends Account {
 
     @Override
     public void addInterest() {
-        // this is a placeholder algorithm for calculating interest
         this.setCurrentBalance(this.getCurrentBalance() * (1 - this.type.getMonthlyInterest()));
     }
 }
