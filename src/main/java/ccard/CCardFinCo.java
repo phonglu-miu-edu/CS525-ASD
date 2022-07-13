@@ -42,5 +42,22 @@ public class CCardFinCo extends FinCo implements ICCardFinCo {
 
         return entry;
     }
+
+    @Override
+    public Entry deposit(IAccount account, double amount) {
+        account.changeBalanceByAmount(amount);
+        Entry entry = new DepositEntry(account, amount);
+        account.addEntryHistory(entry);
+
+        if (account.getCustomer() instanceof Organization) {
+            String message = "Deposit amount of " + amount + " is made at "
+                + DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
+            sendNotification(message, account, amount);
+        }
+
+        this.repository.write(repository.getRepoPath());
+
+        return entry;
+    }
 }
 

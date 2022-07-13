@@ -9,14 +9,12 @@ public class Account implements IAccount {
     private double currentBalance;
     private Collection<Entry> entryHistory = new ArrayList<>();
     INotification<String> notification;
-
     protected double interestRate;
 
     public Account(ICustomer customer, String accountNum) {
         this.customer = customer;
         this.accountNum = accountNum;
         this.currentBalance = 0;
-        //this.entryHistory = entryHistory;
         this.interestRate = 0.01;
     }
 
@@ -33,10 +31,6 @@ public class Account implements IAccount {
 
     public double getInterestRate() {
         return interestRate;
-    }
-
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
     }
 
     @Override
@@ -80,10 +74,6 @@ public class Account implements IAccount {
 
     public Collection<Entry> getEntryHistory() {
         return entryHistory;
-    }
-
-    public void setEntryHistory(Collection<Entry> entryHistory) {
-        this.entryHistory = entryHistory;
     }
 
     public void addEntryHistory(Entry entry)
