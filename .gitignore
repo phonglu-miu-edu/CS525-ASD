@@ -1,5 +1,7 @@
 .idea
 out
 bin
+target
 db.json
-ccard-db.json
+db-ccard.json
+Db-bank.json
