@@ -49,7 +49,7 @@ public class CCardFinCo extends FinCo implements ICCardFinCo {
         Entry entry = new DepositEntry(account, amount);
         account.addEntryHistory(entry);
 
-        if (account.getCustomer() instanceof Organization) {
+        if (account.getCustomer() instanceof Company) {
             String message = "Deposit amount of " + amount + " is made at "
                 + DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
             sendNotification(message, account, amount);

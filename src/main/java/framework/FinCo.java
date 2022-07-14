@@ -1,6 +1,5 @@
 package framework;
 
-import framework.factory.AccountFactory;
 import framework.factory.SimpleFactory;
 import framework.model.*;
 import framework.reports.IReport;
@@ -59,7 +58,7 @@ public class FinCo implements IFinCo {
     }
 
     @Override
-    public ICustomer createOrganization(String name, String street, String city, String state, Integer zip, String email, String noEmployees) {
+    public ICustomer createCompany(String name, String street, String city, String state, Integer zip, String email, String noEmployees) {
         ICustomer customer = SimpleFactory.getCompany(name, street, city, state, zip, email, noEmployees);
 
         this.customers.add(customer);
@@ -70,7 +69,7 @@ public class FinCo implements IFinCo {
 
     @Override
     public IAccount createAccount(ICustomer customer, String accountNum) {
-        IAccount account = AccountFactory.createAccount(customer, accountNum);
+        IAccount account = SimpleFactory.createAccount(customer, accountNum);
         this.accounts.add(account);
         return account;
     }
@@ -136,7 +135,7 @@ public class FinCo implements IFinCo {
     public void sendNotification(String message, IAccount account, double amount) {
         ICustomer customer = account.getCustomer();
         if (account.getNotification() != null) {
-            if (customer instanceof Organization) {
+            if (customer instanceof Company) {
                 account.getNotification().sendNotification(message);
             } else if (amount > 400 || account.getCurrentBalance() < 0) {
                 account.getNotification().sendNotification(message);

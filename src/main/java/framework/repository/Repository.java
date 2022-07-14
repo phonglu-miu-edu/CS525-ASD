@@ -34,7 +34,7 @@ public class Repository extends ConnectionDb implements IRepository {
 			c.put("street", customer.getStreet());
 			c.put("zip", customer.getZip());
 			
-			if(customer.getClass().equals(Organization.class))
+			if(customer.getClass().equals(Company.class))
 					c.put("type", "company");
 			else if(customer.getClass().equals(Person.class))
 				c.put("type", "person");
@@ -143,7 +143,7 @@ public class Repository extends ConnectionDb implements IRepository {
 			Customer c;
 
 			if (o.get("type") != null && o.get("type").equals("company")) {
-				c = new Organization((String) o.get("name"), (String) o.get("street"), (String) o.get("city"),
+				c = new Company((String) o.get("name"), (String) o.get("street"), (String) o.get("city"),
 					(String) o.get("state"), Integer.parseInt(o.get("zip").toString()), (String) o.get("email"),
 					(String) o.get("noEmployees"));
 			} else {

@@ -2,7 +2,7 @@ package framework.view;
 
 import framework.IFramework;
 import framework.command.*;
-import framework.factory.AccountFactory;
+import framework.factory.SimpleFactory;
 import framework.model.Entry;
 import framework.model.IAccount;
 import framework.model.ICustomer;
@@ -97,7 +97,7 @@ public class FinCoViewController implements IFinCoViewController {
     }
 
     public IAccount createAccount(ICustomer customer, String accountNum) {
-        IAccount account = AccountFactory.createAccount(customer, accountNum);
+        IAccount account = SimpleFactory.createAccount(customer, accountNum);
 
         customer.addAccount(account);
         this.getAccounts().add(account);

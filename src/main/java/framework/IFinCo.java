@@ -18,7 +18,7 @@ public interface IFinCo {
 
     ICustomer createCustomer(String name, String street, String city, String state, Integer zip, String email, String birthDate);
 
-    ICustomer createOrganization(String name, String street, String city, String state, Integer zip, String email, String noEmployees);
+    ICustomer createCompany(String name, String street, String city, String state, Integer zip, String email, String noEmployees);
 
     IAccount createAccount(ICustomer customer, String accountNum);
 

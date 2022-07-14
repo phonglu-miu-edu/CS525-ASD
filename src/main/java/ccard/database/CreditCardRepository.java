@@ -76,7 +76,7 @@ public class CreditCardRepository extends Repository {
             c.put("street", customer.getStreet());
             c.put("zip", customer.getZip());
 
-            if (customer.getClass().equals(Organization.class))
+            if (customer.getClass().equals(Company.class))
                 c.put("type", "company");
             else if (customer.getClass().equals(Person.class))
                 c.put("type", "person");

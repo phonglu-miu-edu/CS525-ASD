@@ -35,7 +35,7 @@ public class AddCompany implements ICommand {
 
     @Override
     public void execute() {
-        customer = finCo.createOrganization(name, street, city, state, zip, email, noEmployees);
+        customer = finCo.createCompany(name, street, city, state, zip, email, noEmployees);
     }
 
     public ICustomer getCustomer() {
