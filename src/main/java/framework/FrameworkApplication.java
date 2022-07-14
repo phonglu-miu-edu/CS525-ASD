@@ -8,7 +8,7 @@ import framework.view.ViewType;
 
 public class FrameworkApplication extends Framework {
     public static void main(String[] args) {
-        FinCoViewController viewController = new FinCoViewController(ViewType.BANK);
+        FinCoViewController viewController = new FinCoViewController(ViewType.FRAMEWORK);
         FinCo finCo = new FinCo();
         CommandManager operationManager = new CommandManager();
         IFramework frameworkApplication = new FrameworkApplication();
