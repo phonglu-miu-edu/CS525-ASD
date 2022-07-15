@@ -1,7 +1,6 @@
 package framework.command;
 
-import framework.IFinCo;
-import framework.model.Customer;
+import framework.FinCo;
 import framework.model.ICustomer;
 
 public class AddCompany implements ICommand {
@@ -13,7 +12,7 @@ public class AddCompany implements ICommand {
     private String email;
     private ICustomer customer;
     private String noEmployees;
-    private IFinCo finCo;
+    private FinCo finCo;
 
     public AddCompany(String name,
                       String street,
@@ -22,7 +21,7 @@ public class AddCompany implements ICommand {
                       Integer zip,
                       String email,
                       String noEmployees,
-                      IFinCo finCo) {
+                      FinCo finCo) {
         this.name = name;
         this.street = street;
         this.city = city;

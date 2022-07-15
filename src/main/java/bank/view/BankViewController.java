@@ -31,27 +31,27 @@ public class BankViewController extends FinCoViewController implements IBankView
         ICustomer customer = findCustomerByName(name);
 
         if (customer == null) {
-            AddPerson addPerson = new AddPerson(name, street, city, state, zip, email, birthDate,frameworkApplication.getFinCo());
-            frameworkApplication.getCommandManager().invoke(addPerson);
+            AddPerson addPerson = new AddPerson(name, street, city, state, zip, email, birthDate, this.finCo);
+            this.finCo.getCommandManager().invoke(addPerson);
             customer = addPerson.getCustomer();
         }
 
-        AddAccount addAccount = new AddAccount(customer, accountNum, type, frameworkApplication.getFinCo());
-        frameworkApplication.getCommandManager().invoke(addAccount);
-        frameworkApplication.getFinCo().getRepository().write();
+        AddAccount addAccount = new AddAccount(customer, accountNum, type, this.finCo);
+        this.finCo.getCommandManager().invoke(addAccount);
+        this.finCo.getRepository().write();
     }
     
     public void createCompanyAndAccountByType(String accountNum, String name, String street, String city, String state, Integer zip, String email, String noOfEmployee, Integer type) {
         ICustomer customer = findCustomerByName(name);
 
         if (customer == null) {
-        	AddCompany addCompany = new AddCompany(name, street, city, state, zip, email, noOfEmployee, frameworkApplication.getFinCo());
-            frameworkApplication.getCommandManager().invoke(addCompany);
+        	AddCompany addCompany = new AddCompany(name, street, city, state, zip, email, noOfEmployee, this.finCo);
+            this.finCo.getCommandManager().invoke(addCompany);
             customer = addCompany.getCustomer();
         }
 
-        AddAccount addAccount = new AddAccount(customer, accountNum, type, frameworkApplication.getFinCo());
-        frameworkApplication.getCommandManager().invoke(addAccount);
-        frameworkApplication.getFinCo().getRepository().write();
+        AddAccount addAccount = new AddAccount(customer, accountNum, type, this.finCo);
+        this.finCo.getCommandManager().invoke(addAccount);
+        this.finCo.getRepository().write();
     }
 }

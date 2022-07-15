@@ -1,5 +1,6 @@
 package framework.view;
 
+import framework.FinCo;
 import framework.command.ReportGenerate;
 import framework.model.IAccount;
 import framework.model.Person;
@@ -30,9 +31,11 @@ public class FinCoView extends JFrame {
     public FinCoView myFrame;
     public ViewType viewType;
     public IFinCoViewController viewController;
+    public FinCo finCo;
 
     public FinCoView(IFinCoViewController viewController, ViewType viewType) {
         this.viewController = viewController;
+        this.finCo = viewController.getFinCo();
 
         this.viewType = viewType;
         myFrame = this;
@@ -251,9 +254,9 @@ public class FinCoView extends JFrame {
     public void JButtonReportGenerate_actionPerformed(ActionEvent event) {
         Collection<IAccount> all_accounts = viewController.getAccounts();
         IReport report = new AllAccountsReport(all_accounts);
-        viewController.getFrameworkApplication().getFinCo().setReport(report);
-        ReportGenerate generateReport = new ReportGenerate(viewController.getFrameworkApplication().getFinCo());
-        viewController.getFrameworkApplication().getCommandManager().invoke(generateReport);
+        this.finCo.setReport(report);
+        ReportGenerate generateReport = new ReportGenerate(this.finCo);
+        this.finCo.getCommandManager().invoke(generateReport);
 
         String reportDetails = report.getReport();
 

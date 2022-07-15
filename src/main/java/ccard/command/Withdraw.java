@@ -1,6 +1,6 @@
 package ccard.command;
 
-import ccard.ICCardFinCo;
+import ccard.CCardFinCo;
 import framework.command.ICommand;
 import framework.model.Entry;
 import framework.model.IAccount;
@@ -8,10 +8,10 @@ import framework.model.IAccount;
 public class Withdraw implements ICommand {
     private IAccount account;
     private double amount;
-    private ICCardFinCo finCo;
+    private CCardFinCo finCo;
     private Entry entry;
 
-    public Withdraw(IAccount account, double amount, ICCardFinCo finCo) {
+    public Withdraw(IAccount account, double amount, CCardFinCo finCo) {
         this.account = account;
         this.amount = amount;
         this.finCo = finCo;

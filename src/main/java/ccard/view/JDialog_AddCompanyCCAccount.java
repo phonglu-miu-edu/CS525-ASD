@@ -203,7 +203,7 @@ public class JDialog_AddCompanyCCAccount extends JDialog {
         this.controller.createCompanyAccount(ccNumber, clientName, street, city, state, zip, email, birthDate, expiryDate, cardType);
         this.parent.newaccount = true;
 
-        this.parent.viewController.getFrameworkApplication().getFinCo().getRepository().write();
+        this.parent.viewController.getFinCo().getRepository().write();
 
         dispose();
     }

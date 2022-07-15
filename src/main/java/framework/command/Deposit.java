@@ -1,16 +1,16 @@
 package framework.command;
 
-import framework.IFinCo;
+import framework.FinCo;
 import framework.model.Entry;
 import framework.model.IAccount;
 
 public class Deposit implements ICommand {
     private IAccount account;
     private double amount;
-    private IFinCo finCo;
+    private FinCo finCo;
     private Entry entry;
 
-    public Deposit(IAccount account, double amount, IFinCo finCo) {
+    public Deposit(IAccount account, double amount, FinCo finCo) {
         this.account = account;
         this.amount = amount;
         this.finCo = finCo;

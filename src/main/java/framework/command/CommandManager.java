@@ -1,7 +1,6 @@
 package framework.command;
 
 public class CommandManager {
-
     public CommandManager() {
     }
 

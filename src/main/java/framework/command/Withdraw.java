@@ -1,16 +1,16 @@
 package framework.command;
 
-import framework.IFinCo;
+import framework.FinCo;
 import framework.model.Entry;
 import framework.model.IAccount;
 
 public class Withdraw implements ICommand {
     private IAccount account;
     private double amount;
-    private IFinCo finCo;
+    private FinCo finCo;
     private Entry entry;
 
-    public Withdraw(IAccount account, double amount, IFinCo finCo) {
+    public Withdraw(IAccount account, double amount, FinCo finCo) {
         this.account = account;
         this.amount = amount;
         this.finCo = finCo;
@@ -18,9 +18,7 @@ public class Withdraw implements ICommand {
 
     @Override
     public void execute() {
-        Entry entry = finCo.withdraw(account, amount);
-
-        this.entry = entry;
+        this.entry = finCo.withdraw(account, amount);
     }
 
     public Entry getEntry() {

@@ -4,15 +4,15 @@ import ccard.model.Copper;
 import ccard.model.CreditCardAccount;
 import ccard.model.Gold;
 import ccard.model.Silver;
-import framework.IFinCo;
+import framework.FinCo;
 import framework.model.*;
 import framework.repository.Repository;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class CreditCardRepository extends Repository {
-    public CreditCardRepository(IFinCo finCo) {
-        super(finCo);
+    public CreditCardRepository(FinCo finCo, String repoPath) {
+        super(finCo, repoPath);
     }
 
     @Override
@@ -57,11 +57,6 @@ public class CreditCardRepository extends Repository {
 
     @Override
     public void write() {
-        write(this.getRepoPath());
-    }
-
-    @Override
-    public void write(String path) {
         JSONObject jsonObject = new JSONObject();
         JSONArray customers = new JSONArray();
 
@@ -122,6 +117,6 @@ public class CreditCardRepository extends Repository {
 
         jsonObject.put("customers", customers);
 
-        this.write(path, jsonObject);
+        this.write(getRepoPath(), jsonObject);
     }
 }

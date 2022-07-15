@@ -108,10 +108,10 @@ public class CCardView extends FinCoView {
     public void JButtonReportGenerate_actionPerformed(ActionEvent event) {
         Collection<IAccount> all_accounts = viewController.getAccounts();
         IReport report = new MonthlyBillingReport(all_accounts);
-        viewController.getFrameworkApplication().getFinCo().setReport(report);
+        this.finCo.setReport(report);
 
-        ReportGenerate generateReport = new ReportGenerate(viewController.getFrameworkApplication().getFinCo());
-        viewController.getFrameworkApplication().getCommandManager().invoke(generateReport);
+        ReportGenerate generateReport = new ReportGenerate(this.finCo);
+        this.finCo.getCommandManager().invoke(generateReport);
 
         String reportDetails = report.getReport();
 

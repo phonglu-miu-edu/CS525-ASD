@@ -1,6 +1,7 @@
 package ccard.view;
 
 import ccard.model.CreditCardType;
+import framework.view.FinCoViewController;
 import framework.view.IFinCoViewController;
 
 public interface ICCardViewController extends IFinCoViewController {

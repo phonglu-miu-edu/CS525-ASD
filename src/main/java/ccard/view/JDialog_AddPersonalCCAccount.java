@@ -202,8 +202,8 @@ public class JDialog_AddPersonalCCAccount extends JDialog {
 
 		this.controller.createPersonalAccount(ccNumber, clientName, street, city, state, zip, email, birthDate, expiryDate, cardType);
 		this.parent.newaccount = true;
-
-		this.parent.viewController.getFrameworkApplication().getFinCo().getRepository().write();
+ubn
+		this.parent.viewController.getFinCo().getRepository().write();
 
 		dispose();
 	}

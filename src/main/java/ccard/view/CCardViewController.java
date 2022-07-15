@@ -1,6 +1,6 @@
 package ccard.view;
 
-import ccard.ICCardFinCo;
+import ccard.CCardFinCo;
 import ccard.command.AddAccount;
 import ccard.command.Withdraw;
 import ccard.model.CreditCardType;
@@ -44,17 +44,17 @@ public class CCardViewController extends FinCoViewController implements ICCardVi
                 zip,
                 email,
                 birthDate,
-                frameworkApplication.getFinCo()
+                this.finCo
             );
 
-            frameworkApplication.getCommandManager().invoke(addPersonOperation);
+            this.finCo.getCommandManager().invoke(addPersonOperation);
 
             customer = addPersonOperation.getCustomer();
         }
 
-        AddAccount addAccount = new AddAccount(customer, accountNum, cardType, expiryDate, (ICCardFinCo) frameworkApplication.getFinCo());
+        AddAccount addAccount = new AddAccount(customer, accountNum, cardType, expiryDate, (CCardFinCo) this.finCo);
 
-        frameworkApplication.getCommandManager().invoke(addAccount);
+        this.finCo.getCommandManager().invoke(addAccount);
     }
 
     @Override
@@ -70,23 +70,23 @@ public class CCardViewController extends FinCoViewController implements ICCardVi
                 zip,
                 email,
                 noOfEmployees,
-                frameworkApplication.getFinCo()
+                this.finCo
             );
 
-            frameworkApplication.getCommandManager().invoke(addCompany);
+            this.finCo.getCommandManager().invoke(addCompany);
 
             customer = addCompany.getCustomer();
         }
 
-        AddAccount addAccountOperation = new AddAccount(customer, accountNum, cardType, expiryDate, (ICCardFinCo) frameworkApplication.getFinCo());
+        AddAccount addAccountOperation = new AddAccount(customer, accountNum, cardType, expiryDate, (CCardFinCo) this.finCo);
 
-        frameworkApplication.getCommandManager().invoke(addAccountOperation);
+        this.finCo.getCommandManager().invoke(addAccountOperation);
     }
 
     @Override
     public Entry withdraw(IAccount account, double amount) {
-        Withdraw withdraw = new Withdraw(account, amount, (ICCardFinCo) frameworkApplication.getFinCo());
-        frameworkApplication.getCommandManager().invoke(withdraw);
+        Withdraw withdraw = new Withdraw(account, amount, (CCardFinCo) this.finCo);
+        this.finCo.getCommandManager().invoke(withdraw);
 
         return withdraw.getEntry();
     }

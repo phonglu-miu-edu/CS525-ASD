@@ -1,11 +1,11 @@
 package framework.command;
 
-import framework.IFinCo;
+import framework.FinCo;
 
 public class AddInterest implements ICommand {
-    IFinCo finCo;
+    FinCo finCo;
 
-    public AddInterest(IFinCo finCo) {
+    public AddInterest(FinCo finCo) {
         this.finCo = finCo;
     }
 

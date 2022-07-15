@@ -1,11 +1,11 @@
 package framework.command;
 
-import framework.IFinCo;
+import framework.FinCo;
 
 public class ReportGenerate implements ICommand {
-    private IFinCo finCo;
+    private FinCo finCo;
 
-    public ReportGenerate(IFinCo finCo) {
+    public ReportGenerate(FinCo finCo) {
         this.finCo = finCo;
     }
 
@@ -13,5 +13,4 @@ public class ReportGenerate implements ICommand {
     public void execute() {
         finCo.generateReport();
     }
-
 }

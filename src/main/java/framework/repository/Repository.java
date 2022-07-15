@@ -1,25 +1,21 @@
 package framework.repository;
 
-import framework.IFinCo;
+import framework.FinCo;
 import framework.model.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Repository extends ConnectionDb implements IRepository {
-	protected IFinCo finCo;
+	protected FinCo finCo;
 	private String repoPath;
 
-	public Repository(IFinCo finCo) {
+	public Repository(FinCo finCo, String repoPath) {
 		this.finCo = finCo;
+		this.repoPath = repoPath;
 	}
 
 	@Override
 	public void write() {
-		write(this.repoPath);
-	}
-
-	@Override
-	public void write(String path) {
 		JSONObject jsonObject = new JSONObject();
 		JSONArray customers = new JSONArray();
 
@@ -75,18 +71,12 @@ public class Repository extends ConnectionDb implements IRepository {
 
 	@Override
 	public void load() {
-		load(this.repoPath);
-	}
-
-	@Override
-	public void load(String path) {
 		JSONObject jsonObject = this.read(repoPath);
 
 		if (jsonObject == null)
 			return;
 
 		this.loadCustomer(jsonObject);
-
 	}
 
 	@Override
